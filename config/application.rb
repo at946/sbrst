@@ -22,6 +22,19 @@ module ForNowBrainstorming
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    # testファイルを生成しない
+    config.generators do |g|
+      g.test_framework false
+    end
+
+    # 日本語化
+    config.i18n.default_locale = :ja
+
+    # form error時のfield_with_errors追加を抑止
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      %Q(#{html_tag}).html_safe
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

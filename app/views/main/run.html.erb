@@ -1,0 +1,19 @@
+<div class="container my-5">
+  <div class="mb-5">
+    <h1 id="limit_time" class="text-center mb-3"><%= @setting.limit_time %></h1>
+    <p class="h3 text-center"><%= @setting.problem %></p>
+  </div>
+  <div id="answer_area">
+    <%= render partial: "answer", locals: { answers: @answers } %>
+  </div>
+  <div id="answer_list_area">
+    <%= render partial: "answer_list", locals: { answers: @answers } %>
+  </div>
+    <%= form_with url: result_path, local: true, id: "result_form" do |form| %>
+      <%= hidden_field_tag :problem, @setting.problem %>
+      <div id="post_answers_area">
+        <%= render partial: "post_answers", locals: { answers: @answers } %>
+      </div>
+    <%= form.submit "出し切った！", id: "finish_brasto_button", class: "fixed-bottom btn btn-secondary d-block mx-auto w-100 rounded-0", data: { confirm: "ブレストを完了しますか？" } %>
+  <% end %>
+</div>

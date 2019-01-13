@@ -1,0 +1,9 @@
+<div class="container my-5">
+  <p class="mb-5 h3 text-center"><%= @problem %></p>
+  <% if @answers.present? %>
+    <%= render partial: "answer_list", locals: { answers: @answers } %>
+  <% else %>
+    <p class="mb-5 text-center">何も思いつきませんでした...</p>
+  <% end %>
+  <%= link_to "トップページ", root_path, id: "top_link", class: "btn btn-link w-50 d-block mx-auto" %>
+</div>

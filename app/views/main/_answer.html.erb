@@ -1,0 +1,13 @@
+<%= form_with url: add_path do |form| %>
+  <div class="form-group">
+    <div class="input-group">
+      <%= form.text_field :answer, class: "form-control", autofocus: true, "aria-describedby": :add_button %>
+      <div class="input-group-append">
+        <%= button_tag type: :submit, id: :add_button, class: "btn btn-secondary" do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render partial: "post_answers", locals: { answers: answers } %>
+<% end %>
