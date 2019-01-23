@@ -10,13 +10,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'favicon.ico' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   </head>
 
   <body class="d-flex flex-column h-100" cz-shortcut-listen="true">
     <nav class="navbar bg-primary flex-shrink-0">
       <%= link_to root_path do %>
-        <%= image_tag "logo_typeB", id: "logo", class: "navbar-brand p-0" %>
+        <%= image_tag 'logo_typeB.png', id: "logo", class: "navbar-brand p-0" %>
       <% end %>
     </nav>
 
@@ -26,7 +27,6 @@
 
     <footer class="footer mt-auto py-3 bg-primary text-center text-muted">
       <span>(c) at.</span>
-      <!-- <i class="fab fa-twitter"></i> -->
     </footer>
   </body>
 
