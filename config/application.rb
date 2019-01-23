@@ -30,6 +30,10 @@ module ForNowBrainstorming
     # 日本語化
     config.i18n.default_locale = :ja
 
+    # 日本時間化
+    config.time_zone = 'Tokyo'
+    # config.active_record.default_timezone = :local
+
     # form error時のfield_with_errors追加を抑止
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       %Q(#{html_tag}).html_safe
