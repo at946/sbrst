@@ -7,10 +7,12 @@ $(document).on 'turbolinks:load', ->
   $interval = 1 * 1000
 
   if $limit_time > 0
-    $last_time = cal_time($limit_time)
+    cal_time($limit_time)
     timer = setInterval ->
       $limit_time -= $interval
       cal_time($limit_time)
+      if $limit_time < 0
+        clearInterval(timer)
     , $interval
 
 cal_time = (limit_time) ->
@@ -21,4 +23,3 @@ cal_time = (limit_time) ->
     $("#limit_time").text($last_time)
   else
     $("#result_form").submit()
-    console.log("HELLO")
