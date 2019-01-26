@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    container_name: toriaezu-brasto-web-prod
     build:
       context: .
       dockerfile: docker/production/Dockerfile
@@ -11,4 +12,4 @@ services:
     volumes:
       - .:/for_now_brainstorming
     ports:
-      - "80:3000"
+      - "3000:3000"

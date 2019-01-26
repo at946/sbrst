@@ -35,13 +35,13 @@ feature "03_ブレストを開始できること", type: :system, js: true do
     expect(page).to have_text "ブレストする時間は1分以上に設定してください"
   end
 
-  scenario "【トップページ】で【ブレストする時間】が31以上の状態で【ブレストを始める】を選択した場合、「ブレストする時間は30分以下に設定してください」とエラー表示されること" do
+  scenario "【トップページ】で【ブレストする時間】が11以上の状態で【ブレストを始める】を選択した場合、「ブレストする時間は10分以下に設定してください」とエラー表示されること" do
     fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: 31
+    fill_in :setting_limit_time, with: 11
     click_on :start_brasto_button
     expect(current_path).to eq run_path
     expect(page).to have_selector "#start_brasto_button"
-    expect(page).to have_text "ブレストする時間は30分以下に設定してください"
+    expect(page).to have_text "ブレストする時間は10分以下に設定してください"
   end
 
   scenario "【トップページ】で【ブレストしたい課題】【ブレストする時間】を正しく入力した状態で【ブレストを始める】を選択した場合、【ブレストページ】へ遷移できること" do
@@ -68,9 +68,9 @@ feature "03_ブレストを開始できること", type: :system, js: true do
     expect(page).to have_text "01:00"
     visit root_path
     fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: 30
+    fill_in :setting_limit_time, with: 10
     click_on :start_brasto_button
     expect(current_path).to eq run_path
-    expect(page).to have_text "30:00"    
+    expect(page).to have_text "10:00"
   end
 end

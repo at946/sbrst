@@ -69,6 +69,3 @@ gem 'jquery-rails'
 
 # Autoprefixer doesn’t support Node v4.8.2. Update it.
 gem 'mini_racer'
-
-# google analytics
-gem 'google-analytics-rails', '1.1.1'
