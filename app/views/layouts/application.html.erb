@@ -13,13 +13,27 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'favicon.ico' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+    <% if Rails.env.production? %>
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJNFNZH');</script>
+      <!-- End Google Tag Manager -->
+    <% end %>
   </head>
 
   <body class="d-flex flex-column h-100" cz-shortcut-listen="true">
+    <% if Rails.env.production? %>
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNFNZH"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+    <% end %>
     <nav class="navbar bg-primary flex-shrink-0">
       <%= link_to root_path do %>
-        <%= image_tag 'logo_typeB.png', id: "logo", class: "navbar-brand p-0" %>
+        <%= image_tag 'logo_typeB.png', id: "logo", class: "navbar-brand p-0", style: "height: 30px;" %>
       <% end %>
     </nav>
 

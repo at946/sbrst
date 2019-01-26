@@ -87,7 +87,3 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
-
-  # replace this with your tracker code
-  GA.tracker = "UA-133191199-1"
-end

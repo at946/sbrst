@@ -1,5 +1,7 @@
 <div class="container my-5">
-  <p class="mb-5 h3 text-center"><%= @problem %></p>
+  <p class="h2 mb-5 text-center text-secondary">おつかれさまでした</p>
+  <p class="mb-1 h5 text-center">"<%= @problem %>"</p>
+  <p class="mb-3 h5 text-center">をブレストした結果</p>
   <% if @answers.present? %>
     <%= render partial: "answer_list", locals: { answers: @answers } %>
   <% else %>

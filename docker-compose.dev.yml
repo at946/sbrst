@@ -1,9 +1,12 @@
 version: '3'
 services:
   web:
+    container_name: toriaezu-brasto-web-dev
     build:
       context: .
       dockerfile: docker/development/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
     command: rails s
     volumes:
       - .:/for_now_brainstorming
@@ -12,6 +15,7 @@ services:
     depends_on:
       - chrome
   chrome:
+    container_name: toriaezu-brasto-test-chrome
     image: selenium/standalone-chrome:3.141.59-dubnium
     ports:
       - "4444:4444"
