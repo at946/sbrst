@@ -4,7 +4,7 @@ ja:
     attributes:
       setting:
         problem: "ブレストしたいこと"
-        limit_time: "ブレストしたい時間（1〜10分）"
+        limit_time: "制限時間"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

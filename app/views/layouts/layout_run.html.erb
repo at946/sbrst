@@ -14,14 +14,9 @@
   </head>
 
   <body class="d-flex flex-column h-100" cz-shortcut-listen="true">
-    <% if Rails.env.production? %>
-      <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNFNZH"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-      <!-- End Google Tag Manager (noscript) -->
-    <% end %>
+    <%= render partial: "layouts/body_tag" %>
     <nav class="navbar bg-primary flex-shrink-0">
-      <%= image_tag "logo_typeB.png", id: "logo", class: "navbar-brand p-0", style: "height: 30px;" %>
+      <%= image_tag "logo_typeB.png", id: "logo", class: "navbar-brand p-0", style: "height: 36px;" %>
     </nav>
 
     <main role="main" class="flex-shrink-0">

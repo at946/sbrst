@@ -14,15 +14,10 @@
   </head>
 
   <body class="d-flex flex-column h-100" cz-shortcut-listen="true">
-    <% if Rails.env.production? %>
-      <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNFNZH"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-      <!-- End Google Tag Manager (noscript) -->
-    <% end %>
+    <%= render partial: "layouts/body_tag" %>
     <nav class="navbar bg-primary flex-shrink-0">
       <%= link_to root_path do %>
-        <%= image_tag 'logo_typeB.png', id: "logo", class: "navbar-brand p-0", style: "height: 30px;" %>
+        <%= image_tag 'logo_typeB.png', id: "logo", class: "navbar-brand p-0", style: "height: 36px;" %>
       <% end %>
     </nav>
 
@@ -30,11 +25,11 @@
       <%= yield %>
     </main>
 
-    <footer class="footer mt-auto py-1 bg-primary text-center text-muted">
+    <footer class="footer mt-auto py-2 bg-primary text-center text-muted">
       <ul class="nav justify-content-center">
-        <li class="nav-item"><small><%= link_to "＞トップ", root_path, class: "nav-link text-reset" %></small></li>
-          <li class="nav-item"><small><%= link_to "＞利用規約", terms_of_service_path, class: "nav-link text-reset" %></small></li>
-          <li class="nav-item"><small><%= link_to "＞プライバシーポリシー", privacy_policy_path, class: "nav-link text-reset" %></small></li>
+        <li class="nav-item"><small><%= link_to "トップ", root_path, id: :fmenu_to_top, class: "nav-link text-reset" %></small></li>
+        <li class="nav-item"><small><%= link_to "利用規約", terms_of_service_path, id: :fmenu_to_tos, class: "nav-link text-reset" %></small></li>
+        <li class="nav-item"><small><%= link_to "プライバシーポリシー", privacy_policy_path, id: :fmenu_to_pp, class: "nav-link text-reset" %></small></li>
       </ul>
     </footer>
   </body>
