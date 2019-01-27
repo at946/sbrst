@@ -5,23 +5,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="「とりあえずブレスト」は、アイデア出しや頭の整理をしたい時に便利な効率化ツールです。会員登録不要で気軽にブレインストーミングをすることができます。Enjoy brainstorming and Change the world!!">
+    <%= render partial: "layouts/meta_tag", locals: { adsense: false } %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'favicon.ico' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <% if Rails.env.production? %>
-      <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TJNFNZH');</script>
-      <!-- End Google Tag Manager -->
-    <% end %>
   </head>
 
   <body class="d-flex flex-column h-100" cz-shortcut-listen="true">
