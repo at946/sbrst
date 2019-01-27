@@ -3,6 +3,12 @@ class MainController < ApplicationController
     @setting = Setting.new
   end
 
+  def terms_of_service
+  end
+
+  def privacy_policy
+  end
+
   def run
     @setting = Setting.new(params_setting)
     if @setting.valid?

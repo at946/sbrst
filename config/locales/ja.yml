@@ -3,8 +3,8 @@ ja:
   activemodel:
     attributes:
       setting:
-        problem: "ブレストしたい課題"
-        limit_time: "ブレストする時間"
+        problem: "ブレストしたいこと"
+        limit_time: "ブレストしたい時間（1〜10分）"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

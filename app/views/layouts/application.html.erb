@@ -30,8 +30,12 @@
       <%= yield %>
     </main>
 
-    <footer class="footer mt-auto py-3 bg-primary text-center text-muted">
-      <span>(c) at.</span>
+    <footer class="footer mt-auto py-1 bg-primary text-center text-muted">
+      <ul class="nav justify-content-center">
+        <li class="nav-item"><small><%= link_to "＞トップ", root_path, class: "nav-link text-reset" %></small></li>
+          <li class="nav-item"><small><%= link_to "＞利用規約", terms_of_service_path, class: "nav-link text-reset" %></small></li>
+          <li class="nav-item"><small><%= link_to "＞プライバシーポリシー", privacy_policy_path, class: "nav-link text-reset" %></small></li>
+      </ul>
     </footer>
   </body>
 
