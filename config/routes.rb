@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   get 'run',    to: 'main#redirect_top'
   get 'result', to: 'main#redirect_top'
 
+  get 'terms_of_service', to: 'main#terms_of_service',  as: :terms_of_service
+  get 'privacy_policy',   to: 'main#privacy_policy',    as: :privacy_policy
   root to: 'main#top'
 end
