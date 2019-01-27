@@ -1,6 +1,6 @@
 <div class="container mb-5">
   <%= image_tag 'logo_typeA.png', class: "d-block mx-auto mw-100" %>
-  <p class="mb-5 text-center text-secondary">とりあえずブレストして、頭の中を整理しませんか？</p>
+  <p class="mb-5 text-center text-secondary">とりあえずブレストして、<br class="d-sm-block d-md-none">頭の中を整理しませんか？</p>
 
   <% if @setting.errors.present? %>
     <div class="alert alert-warning" role="alert">
@@ -24,6 +24,8 @@
         </div>
       </div>
     </div>
-    <%= form.submit "ブレストを始める", class: "btn btn-secondary d-block mx-auto mt-5 w-50", id: "start_brasto_button" %>
+    <%= form.submit "ブレストを始める", class: "btn btn-secondary d-block mx-auto mt-5 w-50", id: "start_brasto_button", style: "min-width: 200px;" %>
   <% end %>
 </div>
+
+<%= render partial: "advertise" %>
