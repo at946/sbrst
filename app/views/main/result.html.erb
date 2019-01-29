@@ -1,14 +1,27 @@
 <div class="container mb-5">
   <%= render partial: "layouts/share" %>
   <p class="h2 mb-5 text-center text-secondary">おつかれさまでした</p>
-  <p class="mb-1 h5 text-center">"<%= @problem %>"</p>
-  <p class="mb-3 h5 text-center">をブレストした結果</p>
-  <% if @answers.present? %>
-    <%= render partial: "answer_list", locals: { answers: @answers } %>
-  <% else %>
-    <p class="mb-5 text-center">何も思いつきませんでした...</p>
-  <% end %>
-  <%= link_to "トップページ", root_path, id: "top_link", class: "btn btn-secondary w-50 d-block mx-auto" %>
+  <div class="card mb-4 p-4">
+    <p class="mb-1 h5 text-center">【<%= @problem %>】</p>
+    <p class="mb-3 h5 text-center">の<br>ブレスト結果</p>
+    <% if @answers.present? %>
+      <%= render partial: "answer_list", locals: { answers: @answers } %>
+      <i id="copy_icon" class="far fa-copy h4 mt-3 text-right" style="cursor: pointer;"></i>
+    <% else %>
+      <p class="text-center">何も思いつきませんでした...</p>
+    <% end %>
+  </div>
+  <%= link_to "トップページ", root_path, id: "top_link", class: "btn btn-secondary w-50 d-block mx-auto", style: "min-width: 200px;" %>
 </div>
 
 <%= render partial: "advertise" %>
+
+<textarea id="copy_target" class="d-none">
+<% if @answers.present? %>
+<% @answers.each do |ans| %>
+<%= ans %>
+<% end %>
+<% else %>
+何も思いつきませんでした...
+<% end %>
+</textarea>

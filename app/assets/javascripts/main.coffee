@@ -15,6 +15,14 @@ $(document).on 'turbolinks:load', ->
         clearInterval(timer)
     , $interval
 
+  $("#copy_icon").click ->
+    target = $("#copy_target")
+    target.removeClass("d-none")
+    target.select()
+    document.execCommand("Copy")
+    target.addClass("d-none")
+    alert("ブレスト結果をコピーしました！")
+
 cal_time = (limit_time) ->
   if limit_time >= 0
     $min = ("00" + Math.floor(limit_time / 60 / 1000)).slice(-2)
