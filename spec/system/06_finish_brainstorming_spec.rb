@@ -52,7 +52,7 @@ feature "06_制限時間がすぎる前にブレストを終了できること",
     click_on :finish_brasto_button
     page.driver.browser.switch_to.alert.accept
     expect(find("#answer_list").all("li").count).to eq 2
-    expect(find("#answer_list").all("li")[0]).to have_text @answer2
-    expect(find("#answer_list").all("li")[1]).to have_text @answer1
+    expect(find("#answer_list").all("li")[0]).to have_text @answer1
+    expect(find("#answer_list").all("li")[1]).to have_text @answer2
   end
 end

@@ -28,8 +28,11 @@ class MainController < ApplicationController
 
   def result
     @problem = params[:problem]
-    @answers = params[:answers]
-    @answers = [] if @answers.blank?
+    if params[:answers].present?
+      @answers = params[:answers].reverse
+    else
+      @answers = []
+    end
   end
 
   def redirect_top
