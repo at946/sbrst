@@ -20,10 +20,9 @@ feature "05_制限時間がすぎるとブレストが終了すること", type:
   scenario "【ブレストページ】でタイマーが０秒になった場合、【ブレスト結果ページ】へ遷移すること" do
     expect(find("#answer_list").all("li").count).to eq 0
     fill_in :answer, with: @answer1
-    click_on :add_button
+    find("#add_button").click
     fill_in :answer, with: @answer2
     click_on :add_button
-    expect(current_path).to eq run_path
     expect(find("#answer_list").all("li").count).to eq 2
     sleep 65
     expect(current_path).to eq result_path
