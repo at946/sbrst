@@ -23,6 +23,15 @@ $(document).on 'turbolinks:load', ->
     target.addClass("d-none")
     alert("ブレスト結果をコピーしました！")
 
+  $("#add_answer_form").submit ->
+    ans = $("#answer").val().trim()
+    console.log("HELLO")
+    if ans != ""
+      $("#answer_list").prepend("<li class='list-group-item'>" + ans + "</li>")
+      $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
+    $("#answer").val("")
+    return false
+
 cal_time = (limit_time) ->
   if limit_time >= 0
     $min = ("00" + Math.floor(limit_time / 60 / 1000)).slice(-2)

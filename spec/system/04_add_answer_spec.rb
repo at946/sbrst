@@ -20,7 +20,6 @@ feature "04_回答を登録できること", type: :system, js: true do
     expect(find("#answer_list").all("li").count).to eq 0
     fill_in :answer, with: ""
     click_on :add_button
-    expect(current_path).to eq run_path
     expect(find("#answer_list").all("li").count).to eq 0
     expect(find("#answer").value).to eq ""
   end
@@ -30,12 +29,10 @@ feature "04_回答を登録できること", type: :system, js: true do
     expect(find("#answer_list").all("li").count).to eq 0
     fill_in :answer, with: "　　　"
     click_on :add_button
-    expect(current_path).to eq run_path
     expect(find("#answer_list").all("li").count).to eq 0
     expect(find("#answer").value).to eq ""
     fill_in :answer, with: "   "
     click_on :add_button
-    expect(current_path).to eq run_path
     expect(find("#answer_list").all("li").count).to eq 0
     expect(find("#answer").value).to eq ""
   end
@@ -45,13 +42,11 @@ feature "04_回答を登録できること", type: :system, js: true do
     expect(find("#answer_list").all("li").count).to eq 0
     fill_in :answer, with: @answer1
     click_on :add_button
-    expect(current_path).to eq run_path
     expect(find("#answer_list").all("li").count).to eq 1
     expect(find("#answer_list").all("li")[0]).to have_text @answer1
     expect(find("#answer").value).to eq ""
     fill_in :answer, with: @answer2
     click_on :add_button
-    expect(current_path).to eq run_path
     expect(find("#answer_list").all("li").count).to eq 2
     expect(find("#answer_list").all("li")[0]).to have_text @answer2
     expect(find("#answer_list").all("li")[1]).to have_text @answer1

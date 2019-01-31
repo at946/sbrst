@@ -12,10 +12,3 @@ services:
       - .:/for_now_brainstorming
     ports:
       - "3000:3000"
-    depends_on:
-      - chrome
-  chrome:
-    container_name: toriaezu-brasto-test-chrome
-    image: selenium/standalone-chrome:3.141.59-dubnium
-    ports:
-      - "4444:4444"
