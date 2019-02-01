@@ -32,11 +32,6 @@ gem 'turbolinks', '~> 5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-group :production do
-  # site map for SEO.
-  gem 'sitemap_generator'  
-end
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -74,3 +69,6 @@ gem 'jquery-rails'
 
 # Autoprefixer doesn’t support Node v4.8.2. Update it.
 gem 'mini_racer'
+
+# site map for SEO.
+gem 'sitemap_generator'
