@@ -13,17 +13,27 @@ feature "09_ブレスト結果を並び替えれること", type: :system, js: t
     click_on :add_button
     fill_in :answer, with: @answer2
     click_on :add_button
-    click_on :finish_brasto_button
-    page.driver.browser.switch_to.alert.accept
   end
 
-  scenario "【ブレスト結果ページ】で【ブレストリスト】の順番を並び替えれること" do
-    expect(find("#answer_list").all("li")[0]).to have_text @answer1
-    expect(find("#answer_list").all("li")[1]).to have_text @answer2
+  scenario "【ブレストページ】で【ブレストリスト】の順番を並び替えられないこと" do
+    expect(find("#answer_list").all("li")[0]).to have_text @answer2
+    expect(find("#answer_list").all("li")[1]).to have_text @answer1
     drag = find("#answer_list").all("li")[0]
     drop = find("#answer_list").all("li")[1]
     drag.drag_to drop
     expect(find("#answer_list").all("li")[0]).to have_text @answer2
     expect(find("#answer_list").all("li")[1]).to have_text @answer1
+  end
+
+  scenario "【ブレスト結果ページ】で【ブレストリスト】の順番を並び替えれること" do
+    click_on :finish_brasto_button
+    page.driver.browser.switch_to.alert.accept
+    expect(find("#result_list").all("li")[0]).to have_text @answer1
+    expect(find("#result_list").all("li")[1]).to have_text @answer2
+    drag = find("#result_list").all("li")[0]
+    drop = find("#result_list").all("li")[1]
+    drag.drag_to drop
+    expect(find("#result_list").all("li")[0]).to have_text @answer2
+    expect(find("#result_list").all("li")[1]).to have_text @answer1
   end
 end
