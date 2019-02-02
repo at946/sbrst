@@ -21,10 +21,4 @@
 
 <%= render partial: "advertise" %>
 
-<textarea id="copy_target" class="d-none">
-<% if @answers.present? %>
-<% @answers.each do |ans| %>
-<%= ans %>
-<% end %>
-<% end %>
-</textarea>
+<div id="copy_area"></div>

@@ -16,21 +16,29 @@ $(document).on 'turbolinks:load', ->
     , $interval
 
   $("#copy_icon").click ->
+    list = $("#answer_list li")
+    $("#copy_area").append('<textarea id="copy_target"></textarea>')
     target = $("#copy_target")
-    target.removeClass("d-none")
+    $("#answer_list li").each ->
+      target.append($(@).text() + '\n')
     target.select()
     document.execCommand("Copy")
-    target.addClass("d-none")
+    target.remove()
     alert("ブレスト結果をコピーしました！")
 
   $("#add_answer_form").submit ->
     ans = $("#answer").val().trim()
-    console.log("HELLO")
     if ans != ""
       $("#answer_list").prepend("<li class='list-group-item'>" + ans + "</li>")
       $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
     $("#answer").val("")
     return false
+
+  if document.getElementById("answer_list") != null
+    el = document.getElementById("answer_list")
+    sortable = Sortable.create(el, {
+      animation: 150
+      })
 
 cal_time = (limit_time) ->
   if limit_time >= 0
