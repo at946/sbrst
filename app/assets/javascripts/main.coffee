@@ -6,6 +6,7 @@ $(document).on 'turbolinks:load', ->
   $limit_time = $("#limit_time").text()
   $interval = 1 * 1000
 
+  # ブレストページ：制限時間のカウントダウン
   if $limit_time > 0
     cal_time($limit_time)
     timer = setInterval ->
@@ -15,6 +16,17 @@ $(document).on 'turbolinks:load', ->
         clearInterval(timer)
     , $interval
 
+  # ブレストページ：アンサーをアンサーリストへ追加
+  $("#add_answer_form").submit ->
+    ans = $("#answer").val().trim()
+    if ans != ""
+      $("#answer_list").prepend("<li class='list-group-item'>" + ans + "</li>")
+      $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
+    document.getElementById("answer").focus()
+    $("#answer").val("")
+    return false
+
+  # ブレスト結果ページ：クリップボードへのコピー
   $("#copy_icon").click ->
     list = $("#answer_list li")
     $("#copy_area").append('<textarea id="copy_target"></textarea>')
@@ -25,14 +37,6 @@ $(document).on 'turbolinks:load', ->
     document.execCommand("Copy")
     target.remove()
     alert("ブレスト結果をコピーしました！")
-
-  $("#add_answer_form").submit ->
-    ans = $("#answer").val().trim()
-    if ans != ""
-      $("#answer_list").prepend("<li class='list-group-item'>" + ans + "</li>")
-      $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
-    $("#answer").val("")
-    return false
 
   if document.getElementById("answer_list") != null
     el = document.getElementById("answer_list")

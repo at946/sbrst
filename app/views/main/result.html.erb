@@ -2,8 +2,8 @@
   <%= render partial: "layouts/share" %>
   <p class="h2 mb-5 text-center text-secondary">おつかれさまでした</p>
   <div class="card mb-4 p-4">
-    <p class="mb-1 h5 text-center">【<%= @problem %>】</p>
-    <p class="mb-3 h5 text-center">の<br>ブレスト結果</p>
+    <p class="mb-1 h5 text-center"><%= @problem %></p>
+    <p class="mb-3 h5 text-center"><i class="fas fa-chevron-down"></i></p>
 
     <% if @answers.present? %>
       <ul id="answer_list" class="list-group">
