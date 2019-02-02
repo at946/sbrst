@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   post 'run',     to: 'main#run',     as: :run
-  post 'add',     to: 'main#add',     as: :add
   post 'result',  to: 'main#result',  as: :result
 
   # redirect to root path when users access run or result path directly.

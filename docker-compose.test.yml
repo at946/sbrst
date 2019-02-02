@@ -6,8 +6,9 @@ services:
       context: .
       dockerfile: docker/test/Dockerfile
     environment:
+      RAILS_ENV: test
       TZ: Asia/Tokyo
-    command: rails s
+    command: rails s -p 3000
     volumes:
       - .:/for_now_brainstorming
     ports:
