@@ -26,9 +26,9 @@ feature "05_制限時間がすぎるとブレストが終了すること", type:
     expect(find("#answer_list").all("li").count).to eq 2
     sleep 65
     expect(current_path).to eq result_path
-    expect(find("#answer_list").all("li").count).to eq 2
-    expect(find("#answer_list").all("li")[0]).to have_text @answer1
-    expect(find("#answer_list").all("li")[1]).to have_text @answer2
+    expect(find("#result_list").all("li").count).to eq 2
+    expect(find("#result_list").all("li")[0]).to have_text @answer1
+    expect(find("#result_list").all("li")[1]).to have_text @answer2
     expect(page).to have_text @problem
   end
 

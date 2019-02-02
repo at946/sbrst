@@ -6,7 +6,7 @@
     <p class="mb-3 h5 text-center"><i class="fas fa-chevron-down"></i></p>
 
     <% if @answers.present? %>
-      <ul id="answer_list" class="list-group">
+      <ul id="result_list" class="list-group">
         <% @answers.each do |ans| %>
           <li class="list-group-item"><%= ans %></li>
         <% end %>

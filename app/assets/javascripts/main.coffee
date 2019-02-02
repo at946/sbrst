@@ -28,18 +28,19 @@ $(document).on 'turbolinks:load', ->
 
   # ブレスト結果ページ：クリップボードへのコピー
   $("#copy_icon").click ->
-    list = $("#answer_list li")
+    list = $("#result_list li")
     $("#copy_area").append('<textarea id="copy_target"></textarea>')
     target = $("#copy_target")
-    $("#answer_list li").each ->
+    $("#result_list li").each ->
       target.append($(@).text() + '\n')
     target.select()
     document.execCommand("Copy")
     target.remove()
     alert("ブレスト結果をコピーしました！")
 
-  if document.getElementById("answer_list") != null
-    el = document.getElementById("answer_list")
+  # ブレスト結果ページ：リストをドラッグ＆ドロップで入れ替える
+  if document.getElementById("result_list") != null
+    el = document.getElementById("result_list")
     sortable = Sortable.create(el, {
       animation: 150
       })
