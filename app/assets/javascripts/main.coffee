@@ -31,8 +31,8 @@ $(document).on 'turbolinks:load', ->
     list = $("#result_list li")
     $("#copy_area").append('<textarea id="copy_target"></textarea>')
     target = $("#copy_target")
-    $("#result_list li").each ->
-      target.append($(@).text() + '\n')
+    list.each ->
+      target.append($(@).find(".result-item").text() + '\n')
     target.select()
     document.execCommand("Copy")
     target.remove()
@@ -42,8 +42,13 @@ $(document).on 'turbolinks:load', ->
   if document.getElementById("result_list") != null
     el = document.getElementById("result_list")
     sortable = Sortable.create(el, {
-      animation: 150
+      animation: 150,
+      delay: 0
       })
+
+    $(".delete-badge").click ->
+      console.log($(@).parent())
+      $(@).parent().remove()
 
 cal_time = (limit_time) ->
   if limit_time >= 0

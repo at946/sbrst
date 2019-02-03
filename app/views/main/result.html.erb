@@ -8,7 +8,10 @@
     <% if @answers.present? %>
       <ul id="result_list" class="list-group">
         <% @answers.each do |ans| %>
-          <li class="list-group-item"><%= ans %></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="result-item"><%= ans %></span>
+            <span class="badge delete-badge"><i class="fas fa-times"></i></span>
+          </li>
         <% end %>
       </ul>
       <i id="copy_icon" class="far fa-copy h4 mt-3 text-right" style="cursor: pointer;"></i>
