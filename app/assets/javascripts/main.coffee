@@ -31,12 +31,26 @@ $(document).on 'turbolinks:load', ->
     list = $("#result_list li")
     $("#copy_area").append('<textarea id="copy_target"></textarea>')
     target = $("#copy_target")
+    target.append($("#problem").text() + '\n')
+    target.append("----------" + '\n')
     list.each ->
       target.append($(@).find(".result-item").text() + '\n')
     target.select()
     document.execCommand("Copy")
     target.remove()
     alert("ブレスト結果をコピーしました！")
+
+  $("#share_result_on_twitter").click ->
+    window.open(
+      "https://twitter.com/intent/tweet?text=" + sns_text() + "&url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=とりあえずブレスト",
+      "_blank"
+    )
+
+  $("#share_result_on_facebook").click ->
+    window.open(
+      "https://www.facebook.com/dialog/share?app_id=405634673528282&display=popup&quote=" + sns_text() + "&href=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtag=#とりあえずブレスト",
+      "_blank"
+    )
 
   # ブレスト結果ページ：リストをドラッグ＆ドロップで入れ替える
   if document.getElementById("result_list") != null
@@ -58,3 +72,9 @@ cal_time = (limit_time) ->
     $("#limit_time").text($last_time)
   else
     $("#result_form").submit()
+
+sns_text = ->
+  text = $("#problem").text() + "%0a" + "----------" + "%0a"
+  $("#result_list li").each ->
+    text += "- " + $(@).find(".result-item").text() + "%0a"
+  return text
