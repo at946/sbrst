@@ -14,5 +14,5 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 WORKDIR /for_now_brainstorming
 COPY Gemfile /for_now_brainstorming/Gemfile
 COPY Gemfile.lock /for_now_brainstorming/Gemfile.lock
-RUN bundle install -j4 --without development test
+RUN bundle install --without development test
 COPY . /for_now_brainstorming
