@@ -1,7 +1,10 @@
 <div class="container mb-5">
   <%= render partial: "layouts/share" %>
   <%= image_tag 'logo_typeA.png', class: "d-block mx-auto mw-100" %>
-  <h1 class="mb-5 text-center text-secondary h5">とりあえずブレストして、<br class="d-sm-block d-md-none">頭の中を整理しませんか？</h1>
+  <h1 class="text-center text-secondary h5">とりあえずブレストして、<br class="d-sm-block d-md-none">頭の中を整理しませんか？</h1>
+  <p class="text-center mb-4">
+    <a href="https://at-946.hatenablog.com/entry/2019/02/05/004647" class="text-success" target="_blank" rel="noopener noreferrer">How to Use</a>
+  </p>
 
   <% if @setting.errors.present? %>
     <div class="alert alert-warning" role="alert">
