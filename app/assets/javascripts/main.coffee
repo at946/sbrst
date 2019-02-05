@@ -32,7 +32,7 @@ $(document).on 'turbolinks:load', ->
     $("#copy_area").append('<textarea id="copy_target"></textarea>')
     target = $("#copy_target")
     target.append($("#problem").text() + '\n')
-    target.append("----------" + '\n')
+    target.append("↓" + '\n')
     list.each ->
       target.append($(@).find(".result-item").text() + '\n')
     target.select()
@@ -57,7 +57,7 @@ $(document).on 'turbolinks:load', ->
     el = document.getElementById("result_list")
     sortable = Sortable.create(el, {
       animation: 150,
-      delay: 0
+      delay: 100
       })
 
     $(".delete-badge").click ->
