@@ -29,12 +29,16 @@ $(document).on 'turbolinks:load', ->
   # ブレスト結果ページ：クリップボードへのコピー
   $("#copy_icon").click ->
     list = $("#result_list li")
-    $("#copy_area").append('<p id="copy_target"></p>')
+    $("#copy_area").append('<textarea id="copy_target"></textarea>')
     target = $("#copy_target")
     target.append("【" + $("#problem").text() + "】" + '\n')
     list.each ->
-      target.append("・" + $(@).find(".result-item").text() + '\n')
+      target.append("　・" + $(@).find(".result-item").text() + '\n')
     target.select()
+    target_sp = document.getElementById("copy_target")
+    range = document.createRange()
+    range.selectNode(target_sp)
+    window.getSelection().addRange(range)
     document.execCommand("Copy")
     target.remove()
     alert("ブレスト結果をコピーしました！")
@@ -75,5 +79,5 @@ cal_time = (limit_time) ->
 sns_text = ->
   text = "【" + $("#problem").text() + "】%0a"
   $("#result_list li").each ->
-    text += "・" + $(@).find(".result-item").text() + "%0a"
+    text += "　・" + $(@).find(".result-item").text() + "%0a"
   return text
