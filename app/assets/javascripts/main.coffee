@@ -29,7 +29,7 @@ $(document).on 'turbolinks:load', ->
   # ブレスト結果ページ：クリップボードへのコピー
   $("#copy_icon").click ->
     list = $("#result_list li")
-    $("#copy_area").append('<textarea id="copy_target"></textarea>')
+    $("#copy_area").append('<p id="copy_target"></p>')
     target = $("#copy_target")
     target.append("【" + $("#problem").text() + "】" + '\n')
     list.each ->
