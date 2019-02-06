@@ -31,10 +31,9 @@ $(document).on 'turbolinks:load', ->
     list = $("#result_list li")
     $("#copy_area").append('<textarea id="copy_target"></textarea>')
     target = $("#copy_target")
-    target.append($("#problem").text() + '\n')
-    target.append("↓" + '\n')
+    target.append("【" + $("#problem").text() + "】" + '\n')
     list.each ->
-      target.append($(@).find(".result-item").text() + '\n')
+      target.append("・" + $(@).find(".result-item").text() + '\n')
     target.select()
     document.execCommand("Copy")
     target.remove()
@@ -74,7 +73,7 @@ cal_time = (limit_time) ->
     $("#result_form").submit()
 
 sns_text = ->
-  text = $("#problem").text() + "%0a" + "----------" + "%0a"
+  text = "【" + $("#problem").text() + "】%0a"
   $("#result_list li").each ->
-    text += "- " + $(@).find(".result-item").text() + "%0a"
+    text += "・" + $(@).find(".result-item").text() + "%0a"
   return text
