@@ -3,18 +3,19 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', ->
-  $limit_time = $("#limit_time").text()
-  $interval = 1 * 1000
+  limit_time = $("#limit_time").text()
+  interval = 1 * 1000
+  category_count = 1
 
   # ブレストページ：制限時間のカウントダウン
-  if $limit_time > 0
-    cal_time($limit_time)
+  if limit_time > 0
+    cal_time(limit_time)
     timer = setInterval ->
-      $limit_time -= $interval
-      cal_time($limit_time)
-      if $limit_time < 0
+      limit_time -= interval
+      cal_time(limit_time)
+      if limit_time < 0
         clearInterval(timer)
-    , $interval
+    , interval
 
   # ブレストページ：アンサーをアンサーリストへ追加
   $("#add_answer_form").submit ->
@@ -26,13 +27,56 @@ $(document).on 'turbolinks:load', ->
     $("#answer").val("")
     return false
 
+  # ブレスト結果ページ：リストをドラッグ＆ドロップで入れ替える
+  if document.getElementById("result_list") != null
+    el = document.getElementById("result_list")
+    sortable = Sortable.create(el, {
+      animation: 150,
+      delay: 100
+      })
+
+  # ブレスト結果ページ：リストを削除する
+  $(".delete-badge").click ->
+    delete_result_item($(@))
+
+  # ブレスト結果ページ：カテゴリの追加
+  $(".result-item").click ->
+    $(@).before('
+      <li class="list-group-item d-flex justify-content-between align-items-center result-item bg-primary" style="cursor: pointer;">
+        <strong><span class="result-item-name category-name">Category ' + category_count + '</span></strong>
+        <span class="badge text-dark">
+          <i class="far fa-edit edit-badge mr-2" data-toggle="modal" data-target="#category_name_modal"></i>
+          <i class="fas fa-times delete-badge"></i>
+        </span>
+      </li>
+    ')
+    category_count++
+    $(".delete-badge").click ->
+      delete_result_item($(@))
+    $(".edit-badge").click ->
+      $(".target-category").removeClass("target-category")
+      $(@).closest("li").addClass("target-category")
+      edit_category_name($(@))
+
+  # ブレスト結果ページ：モーダルでEnter Keyを入力した場合、Saveボタンを選択したことにする
+  $("#category_name_form").submit ->
+    $("#category_name_modal_save").click()
+    return false
+
+  # ブレスト結果ページ：モーダルでSaveボタンを選択した場合、カテゴリー名が更新される
+  $("#category_name_modal_save").click ->
+    $(".target-category").find(".category-name").text($("#category_name_input").val())
+
   # ブレスト結果ページ：クリップボードへのコピー
   $("#copy_icon").click ->
     $("#copy_area").append('<p id="copy_target"></p>')
     target = $("#copy_target")
-    target.append("【" + $("#problem").text() + "】<br>")
+    target.append("「" + $("#problem").text() + "」<br><br>")
     $("#result_list li").each ->
-      target.append("　・" + $(@).find(".result-item").text() + '<br>')
+      if $(@).find(".category-name").length
+        target.append("【" + $(@).find(".result-item-name").text() + "】<br>")
+      else
+        target.append("・" + $(@).find(".result-item-name").text() + "<br>")
     target.select()
     target_sp = document.getElementById("copy_target")
     range = document.createRange()
@@ -43,41 +87,41 @@ $(document).on 'turbolinks:load', ->
     target.remove()
     alert("ブレスト結果をコピーしました！")
 
+  # ブレスト結果ページ：Twitterへのシェア
   $("#share_result_on_twitter").click ->
     window.open(
       "https://twitter.com/intent/tweet?text=" + sns_text() + "&url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=とりあえずブレスト",
       "_blank"
     )
 
+  # ブレスト結果ページ：Facebookへのシェア
   $("#share_result_on_facebook").click ->
     window.open(
       "https://www.facebook.com/dialog/share?app_id=405634673528282&display=popup&quote=" + sns_text() + "&href=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtag=#とりあえずブレスト",
       "_blank"
     )
 
-  # ブレスト結果ページ：リストをドラッグ＆ドロップで入れ替える
-  if document.getElementById("result_list") != null
-    el = document.getElementById("result_list")
-    sortable = Sortable.create(el, {
-      animation: 150,
-      delay: 100
-      })
-
-    $(".delete-badge").click ->
-      console.log($(@).parent())
-      $(@).parent().remove()
-
 cal_time = (limit_time) ->
   if limit_time >= 0
-    $min = ("00" + Math.floor(limit_time / 60 / 1000)).slice(-2)
-    $sec = ("00" + limit_time % (60 * 1000) / 1000).slice(-2)
-    $last_time = $min + ":" + $sec
-    $("#limit_time").text($last_time)
+    min = ("00" + Math.floor(limit_time / 60 / 1000)).slice(-2)
+    sec = ("00" + limit_time % (60 * 1000) / 1000).slice(-2)
+    last_time = min + ":" + sec
+    $("#limit_time").text(last_time)
   else
     $("#result_form").submit()
 
 sns_text = ->
-  text = "【" + $("#problem").text() + "】%0a"
+  text = "「" + $("#problem").text() + "」%0a%0a"
   $("#result_list li").each ->
-    text += "　・" + $(@).find(".result-item").text() + "%0a"
+    if $(@).find(".category-name").length
+      text += "【" + $(@).find(".result-item-name").text() + "】%0a"
+    else
+      text += "・" + $(@).find(".result-item-name").text() + "%0a"
+  text += "%0a"
   return text
+
+delete_result_item = (target) ->
+  target.closest("li").remove()
+
+edit_category_name = (target) ->
+  $("#category_name_input").val(target.parents("li").find(".result-item-name").text())
