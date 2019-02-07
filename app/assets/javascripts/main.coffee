@@ -5,7 +5,7 @@
 $(document).on 'turbolinks:load', ->
   limit_time = $("#limit_time").text()
   interval = 1 * 1000
-  category_count = 1
+  group_count = 1
 
   # ブレストページ：制限時間のカウントダウン
   if limit_time > 0
@@ -43,14 +43,14 @@ $(document).on 'turbolinks:load', ->
   $(".result-item").click ->
     $(@).before('
       <li class="list-group-item d-flex justify-content-between align-items-center result-item bg-primary" style="cursor: pointer;">
-        <strong><span class="result-item-name category-name">Category ' + category_count + '</span></strong>
+        <strong><span class="result-item-name category-name">Group ' + group_count + '</span></strong>
         <span class="badge text-dark">
           <i class="far fa-edit edit-badge mr-2" data-toggle="modal" data-target="#category_name_modal"></i>
           <i class="fas fa-times delete-badge"></i>
         </span>
       </li>
     ')
-    category_count++
+    group_count++
     $(".delete-badge").click ->
       delete_result_item($(@))
     $(".edit-badge").click ->
