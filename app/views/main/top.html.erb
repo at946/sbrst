@@ -1,6 +1,5 @@
-<div class="container mb-5">
-  <%= render partial: "layouts/share" %>
-  <%= image_tag 'logo_typeA.png', class: "d-block mx-auto mw-100" %>
+<div class="container my-5">
+  <%= image_tag 'logo_typeA.png', class: "d-block mx-auto mw-100", alt: "とりあえずブレスト　ロゴ" %>
   <h1 class="text-center text-secondary h5">とりあえずブレストして、<br class="d-sm-block d-md-none">頭の中を整理しませんか？</h1>
   <p class="text-center mb-4">
     <a href="https://at-946.hatenablog.com/entry/2019/02/05/004647" class="text-success" target="_blank" rel="noopener noreferrer">How to Use</a>
@@ -30,6 +29,43 @@
     </div>
     <%= form.submit "ブレストを始める", class: "btn btn-secondary d-block mx-auto mt-5 w-50", id: "start_brasto_button", style: "min-width: 200px;" %>
   <% end %>
+</div>
+
+<hr>
+
+<div class="container my-5">
+  <div class="row text-center">
+    <h2 class="col-12 mb-4">When to Use</h2>
+    <div class="col-md-4 my-3">
+      <h1 class="mb-3"><i class="far fa-lightbulb text-success"></i></h1>
+      <p>アイデアをブースト！</p>
+    </div>
+    <div class="col-md-4 my-3">
+      <h1 class="mb-3"><i class="fas fa-brain text-success"></i></h1>
+      <p>考え事を整理したい！</p>
+    </div>
+    <div class="col-md-4 my-3">
+      <h1 class="mb-3"><i class="far fa-angry text-success"></i></h1>
+      <p>ストレスを吐き出したい！</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="my-5 text-center">
+    <div class="my-2">
+      <h2 class="mb-3 d-inline">Share me<i class="fas fa-angle-double-right mx-3"></i></h2>
+        <a class="fab fa-twitter mx-1 h3" style="color: #55acee; text-decoration: none;" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=%E3%81%A8%E3%82%8A%E3%81%82%E3%81%88%E3%81%9A%E3%83%96%E3%83%AC%E3%82%B9%E3%83%88" target="_blank" rel="noopener noreferrer"></a>
+        <a class="fab fa-facebook mx-1 h3" style="color: #3B5998; text-decoration: none;" href="https://www.facebook.com/dialog/share?app_id=405634673528282&display=popup&href=https%3A%2F%2Fwww.toriaezu-brasto.tk" target="_blank" rel="noopener noreferrer"></a>
+    </div>
+    <div class="my-2">
+      <h2 class="mb-3 d-inline">Follow me<i class="fas fa-angle-double-right mx-3"></i></h2>
+      <a class="fab fa-twitter mx-1 h3" style="color: #55acee; text-decoration: none;" href="https://twitter.com/intent/follow?screen_name=at_946" target="_blank"></a>
+      <a class="fas fa-pencil-alt mx-1 h3 text-secondary" style="text-decoration: none;" href="https://at-946.hatenablog.com/" target="_blank"></a>
+    </div>
+  </div>
 </div>
 
 <%= render partial: "advertise" %>
