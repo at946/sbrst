@@ -19,7 +19,7 @@ $(document).on 'turbolinks:load', ->
 
   # ブレストページ：アンサーをアンサーリストへ追加
   $("#add_answer_form").submit ->
-    ans = $("#answer").val().trim()
+    ans = escape_html($("#answer").val().trim())
     if ans != ""
       $("#answer_list").prepend("<li class='list-group-item'>" + ans + "</li>")
       $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
@@ -65,7 +65,8 @@ $(document).on 'turbolinks:load', ->
 
   # ブレスト結果ページ：モーダルでSaveボタンを選択した場合、カテゴリー名が更新される
   $("#category_name_modal_save").click ->
-    $(".target-category").find(".category-name").text($("#category_name_input").val())
+    name = $("#category_name_input").val()
+    $(".target-category").find(".category-name").text(name)
 
   # ブレスト結果ページ：クリップボードへのコピー
   $("#copy_icon").click ->
@@ -125,3 +126,12 @@ delete_result_item = (target) ->
 
 edit_category_name = (target) ->
   $("#category_name_input").val(target.parents("li").find(".result-item-name").text())
+
+escape_html = (str) ->
+  str = str.replace(/&/g, '&amp;')
+  str = str.replace(/>/g, '&gt;')
+  str = str.replace(/</g, '&lt;')
+  str = str.replace(/"/g, '&quot;')
+  str = str.replace(/'/g, '&#x27;')
+  str = str.replace(/`/g, '&#x60;')
+  return str
