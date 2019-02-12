@@ -58,6 +58,10 @@ $(document).on 'turbolinks:load', ->
       $(@).closest("li").addClass("target-category")
       edit_category_name($(@))
 
+  # ブレスト結果ページ：editボタンが選択された場合、モーダルのinputがフォーカスされる
+  $('#category_name_modal').on 'shown.bs.modal', ->
+    $("#category_name_input").focus()
+
   # ブレスト結果ページ：モーダルでEnter Keyを入力した場合、Saveボタンを選択したことにする
   $("#category_name_form").submit ->
     $("#category_name_modal_save").click()
