@@ -1,22 +1,27 @@
 <div class="container mb-5">
   <p class="h2 mt-5 mb-4 text-center text-secondary">おつかれさまでした</p>
   <div class="card mb-4 p-4">
-    <p id="problem" class="mb-1 h5 text-center"><%= @problem %></p>
+    <p id="problem" class="mb-1 h5 text-center"><span class="hashtag">#</span><%= @problem %></p>
     <p class="mb-3 h5 text-center"><i class="fas fa-chevron-down"></i></p>
 
     <% if @answers.present? %>
       <ul id="result_list" class="list-group">
         <% @answers.each do |ans| %>
           <li class="list-group-item d-flex justify-content-between align-items-center result-item" style="cursor: pointer;">
-            <span class="result-item-name"><%= ans %></span>
+            <span class="result-item-name"><span class="hashtag">#</span><%= ans %></span>
             <span class="badge"><i class="fas fa-times delete-badge"></i></span>
           </li>
         <% end %>
       </ul>
-      <div class="text-right mt-3">
-        <span id="share_result_on_twitter" class="fab fa-twitter mx-1 h4" style="color: #55acee; text-decoration: none; cursor: pointer;"></span>
-        <span id="share_result_on_facebook" class="fab fa-facebook mx-1 h4" style="color: #3B5998; text-decoration: none; cursor: pointer;"></span>
-        <i id="copy_icon" class="far fa-copy mx-1 h4" style="cursor: pointer;"></i>
+      <div class="mt-3 clearfix">
+        <span class="float-left">
+          <i id="change_hashtag_mode_icon" class="fas fa-hashtag mx-2 h4 text-secondary active" style="cursor: pointer;"></i>
+        </span>
+        <span class="float-right">
+          <i id="share_result_on_twitter" class="fab fa-twitter mx-2 h4" style="color: #55acee; text-decoration: none; cursor: pointer;"></i>
+          <i id="share_result_on_facebook" class="fab fa-facebook mx-2 h4" style="color: #3B5998; text-decoration: none; cursor: pointer;"></i>
+          <i id="copy_icon" class="far fa-copy mx-2 h4" style="cursor: pointer;"></i>
+        </span>
       </div>
     <% else %>
       <p class="text-center">何も思いつきませんでした...</p>
@@ -25,7 +30,7 @@
   <%= link_to "トップページ", root_path, id: "top_link", class: "btn btn-secondary w-50 d-block mx-auto", style: "min-width: 200px;", data: {"turbolinks": false} %>
 </div>
 
-<%= render partial: "advertise_seshop" %>
+<%= render partial: "advertise" %>
 
 <%# modal that changes category's name %>
 <div class="modal fade" id="category_name_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
