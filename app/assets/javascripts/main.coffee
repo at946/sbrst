@@ -42,15 +42,19 @@ $(document).on 'turbolinks:load', ->
   # ブレスト結果ページ：カテゴリの追加
   $(".result-item").click ->
     $(@).before('
-      <li class="list-group-item d-flex justify-content-between align-items-center result-item bg-primary" style="cursor: pointer;">
-        <strong><span class="result-item-name category-name">Group ' + group_count + '</span></strong>
+      <li class="list-group-item d-flex justify-content-between align-items-center result-item bg-primary">
+        <strong>
+          <span class="result-item-name category-name"><span class="hashtag"></span>Group ' + group_count + '</span>
+        </strong>
         <span class="badge text-dark">
-          <i class="far fa-edit edit-badge mr-2" data-toggle="modal" data-target="#category_name_modal"></i>
+          <i class="far fa-edit edit-badge mr-3" data-toggle="modal" data-target="#category_name_modal"></i>
           <i class="fas fa-times delete-badge"></i>
         </span>
       </li>
     ')
     group_count++
+    if $("#change_hashtag_mode_icon").hasClass("active")
+      $(".hashtag").text("#")
     $(".delete-badge").click ->
       delete_result_item($(@))
     $(".edit-badge").click ->
@@ -81,7 +85,7 @@ $(document).on 'turbolinks:load', ->
       if $(@).find(".category-name").length
         target.append("【" + $(@).find(".result-item-name").text() + "】<br>")
       else
-        target.append("・" + $(@).find(".result-item-name").text() + "<br>")
+        target.append("・ " + $(@).find(".result-item-name").text() + "<br>")
     target.select()
     target_sp = document.getElementById("copy_target")
     range = document.createRange()
@@ -91,6 +95,17 @@ $(document).on 'turbolinks:load', ->
     document.execCommand("Copy")
     target.remove()
     alert("ブレスト結果をコピーしました！")
+
+  # ブレスト結果ページ：Change Hashtag Mode
+  $("#change_hashtag_mode_icon").click ->
+    if $(@).hasClass("active")
+      $(".hashtag").text("")
+      $(@).removeClass("active text-secondary")
+      $(@).addClass("text-muted")
+    else
+      $(".hashtag").text("#")
+      $(@).removeClass("text-muted")
+      $(@).addClass("active text-secondary")
 
   # ブレスト結果ページ：Twitterへのシェア
   $("#share_result_on_twitter").click ->
@@ -102,7 +117,7 @@ $(document).on 'turbolinks:load', ->
   # ブレスト結果ページ：Facebookへのシェア
   $("#share_result_on_facebook").click ->
     window.open(
-      "https://www.facebook.com/dialog/share?app_id=405634673528282&display=popup&quote=" + sns_text() + "&href=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtag=#とりあえずブレスト",
+      "https://www.facebook.com/dialog/share?app_id=832453100439280&display=popup&quote=" + sns_text() + "&href=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtag=#とりあえずブレスト",
       "_blank"
     )
 
@@ -116,12 +131,12 @@ cal_time = (limit_time) ->
     $("#result_form").submit()
 
 sns_text = ->
-  text = "「" + $("#problem").text() + "」%0a%0a"
+  text = "「" + escape_sns($("#problem").text()) + "」%0a%0a"
   $("#result_list li").each ->
     if $(@).find(".category-name").length
-      text += "【" + $(@).find(".result-item-name").text() + "】%0a"
+      text += "【" + escape_sns($(@).find(".result-item-name").text()) + "】%0a"
     else
-      text += "・" + $(@).find(".result-item-name").text() + "%0a"
+      text += "・%20" + escape_sns($(@).find(".result-item-name").text()) + "%0a"
   text += "%0a"
   return text
 
@@ -138,4 +153,8 @@ escape_html = (str) ->
   str = str.replace(/"/g, '&quot;')
   str = str.replace(/'/g, '&#x27;')
   str = str.replace(/`/g, '&#x60;')
+  return str
+
+escape_sns = (str) ->
+  str = str.replace(/#/g, '%23')
   return str
