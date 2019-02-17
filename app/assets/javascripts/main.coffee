@@ -44,7 +44,7 @@ $(document).on 'turbolinks:load', ->
     $(@).before('
       <li class="list-group-item d-flex justify-content-between align-items-center result-item bg-primary">
         <strong>
-          <span class="result-item-name category-name"><span class="hashtag"></span>Group ' + group_count + '</span>
+          <span class="result-item-name category-name">Group ' + group_count + '</span>
         </strong>
         <span class="badge text-dark">
           <i class="far fa-edit edit-badge mr-3" data-toggle="modal" data-target="#category_name_modal"></i>
@@ -53,8 +53,6 @@ $(document).on 'turbolinks:load', ->
       </li>
     ')
     group_count++
-    if $("#change_hashtag_mode_icon").hasClass("active")
-      $(".hashtag").text("#")
     $(".delete-badge").click ->
       delete_result_item($(@))
     $(".edit-badge").click ->
@@ -80,12 +78,12 @@ $(document).on 'turbolinks:load', ->
   $("#copy_icon").click ->
     $("#copy_area").append('<p id="copy_target"></p>')
     target = $("#copy_target")
-    target.append("「" + $("#problem").text() + "」<br><br>")
+    target.append("「" + add_hashtag() + $("#problem").text() + "」<br><br>")
     $("#result_list li").each ->
       if $(@).find(".category-name").length
-        target.append("【" + $(@).find(".result-item-name").text() + "】<br>")
+        target.append("【" + add_hashtag() + $(@).find(".result-item-name").text() + "】<br>")
       else
-        target.append("・ " + $(@).find(".result-item-name").text() + "<br>")
+        target.append("・ " + add_hashtag() + $(@).find(".result-item-name").text() + "<br>")
     target.select()
     target_sp = document.getElementById("copy_target")
     range = document.createRange()
@@ -99,11 +97,9 @@ $(document).on 'turbolinks:load', ->
   # ブレスト結果ページ：Change Hashtag Mode
   $("#change_hashtag_mode_icon").click ->
     if $(@).hasClass("active")
-      $(".hashtag").text("")
       $(@).removeClass("active text-secondary")
       $(@).addClass("text-muted")
     else
-      $(".hashtag").text("#")
       $(@).removeClass("text-muted")
       $(@).addClass("active text-secondary")
 
@@ -131,12 +127,12 @@ cal_time = (limit_time) ->
     $("#result_form").submit()
 
 sns_text = ->
-  text = "「" + escape_sns($("#problem").text()) + "」%0a%0a"
+  text = "「" + escape_sns(add_hashtag() + $("#problem").text()) + "」%0a%0a"
   $("#result_list li").each ->
     if $(@).find(".category-name").length
-      text += "【" + escape_sns($(@).find(".result-item-name").text()) + "】%0a"
+      text += "【" + escape_sns(add_hashtag() + $(@).find(".result-item-name").text()) + "】%0a"
     else
-      text += "・%20" + escape_sns($(@).find(".result-item-name").text()) + "%0a"
+      text += "・%20" + escape_sns(add_hashtag() + $(@).find(".result-item-name").text()) + "%0a"
   text += "%0a"
   return text
 
@@ -158,3 +154,8 @@ escape_html = (str) ->
 escape_sns = (str) ->
   str = str.replace(/#/g, '%23')
   return str
+
+add_hashtag = ->
+  if $("#change_hashtag_mode_icon").hasClass("active")
+    return "#"
+  return ""

@@ -1,14 +1,14 @@
 <div class="container mb-5">
   <p class="h2 mt-5 mb-4 text-center text-secondary">おつかれさまでした</p>
   <div class="card mb-4 p-4">
-    <p id="problem" class="mb-1 h5 text-center"><span class="hashtag">#</span><%= @problem %></p>
+    <p id="problem" class="mb-1 h5 text-center"><%= @problem %></p>
     <p class="mb-3 h5 text-center"><i class="fas fa-chevron-down"></i></p>
 
     <% if @answers.present? %>
       <ul id="result_list" class="list-group">
         <% @answers.each do |ans| %>
           <li class="list-group-item d-flex justify-content-between align-items-center result-item" style="cursor: pointer;">
-            <span class="result-item-name"><span class="hashtag">#</span><%= ans %></span>
+            <span class="result-item-name"><%= ans %></span>
             <span class="badge"><i class="fas fa-times delete-badge"></i></span>
           </li>
         <% end %>
