@@ -18,8 +18,7 @@
     </form>
   </div>
 
-  <ul id="answer_list" class="mb-5 list-group">
-  </ul>
+  <ul id="answer_list" class="mb-5 list-group"></ul>
 
   <%= form_with url: result_path, local: true, id: "result_form" do |form| %>
     <%= hidden_field_tag :problem, @setting.problem %>
