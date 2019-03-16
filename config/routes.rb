@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   get 'terms_of_service', to: 'common#terms_of_service',  as: :tos
   get 'privacy_policy',   to: 'common#privacy_policy',    as: :pp
-  root to: 'main#top'
+  
+  root to: 'common#top'
 end

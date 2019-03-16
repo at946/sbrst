@@ -1,8 +1,4 @@
 class MainController < ApplicationController
-  def top
-    render layout: 'layout_top'
-  end
-
   def set
     @setting = Setting.new
   end

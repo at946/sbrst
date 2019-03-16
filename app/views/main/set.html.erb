@@ -5,8 +5,8 @@
         <div class="mb-4">
           <% if @setting.errors.present? %>
             <div class="center-align red-text">
-              <% @setting.errors.messages.each do |attr, msg| %>
-                <p><%= @setting.errors.full_messages_for(attr).first %></p>
+              <% @setting.errors.full_messages.each do |msg| %>
+                <p><%= msg %></p>
               <% end %>
             </div>
           <% end %>

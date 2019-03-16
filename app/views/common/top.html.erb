@@ -6,7 +6,7 @@
   <div class="center-align">
     <h1 id="top_title" class="white-text mb-2">とりあえず<br class="hide-on-med-and-up">ブレスト</h1>
     <h5 class="white-text mb-5">Your answer is in Your head.</h5>
-    <%= link_to "ブレストを始める", set_path, class: "waves-effect waves-light btn", style: "width: 250px; border-radius: 10rem;" %>
+    <%= link_to "ブレストを始める", set_path, id: :start_first_button, class: "waves-effect waves-light btn", style: "width: 250px; border-radius: 10rem;" %>
   </div>
   <div class="center-align white-text" style="position: absolute; bottom: 1rem;">
     <p>more info.</p>
@@ -40,6 +40,6 @@
       <%= render 'rule_card', text_en: "Go for quantity", text_jp: "量を重視する" %>
       <%= render 'rule_card', text_en: "Combine and improve", text_jp: "アイデアを結合し発展させる" %>
     </div>
-    <%= link_to "ブレストを始める", set_path, class: "waves-effect waves-light btn mb-5", style: "width: 250px; border-radius: 10rem;" %>
+    <%= link_to "ブレストを始める", set_path, id: :start_second_button, class: "waves-effect waves-light btn mb-5", style: "width: 250px; border-radius: 10rem;" %>
   </div>
 </div>
