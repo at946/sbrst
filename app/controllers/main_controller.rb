@@ -1,17 +1,24 @@
 class MainController < ApplicationController
   def top
+    render layout: 'layout_top'
+  end
+
+  def set
     @setting = Setting.new
   end
 
-  def run
+  def brst
     @setting = Setting.new(params_setting)
+    @setting.problem.gsub!(/(^[[:space:]]+)|([[:space:]]+$)/, '')
     if @setting.valid?
       @answers = []
       @setting.limit_time = @setting.limit_time.to_i * 60 * 1000
-      render layout: 'layout_run'
     else
-      render :top
+      render :set
     end
+  end
+
+  def ks
   end
 
   def result

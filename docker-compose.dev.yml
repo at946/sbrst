@@ -4,7 +4,7 @@ services:
     container_name: toriaezu-brasto-web-dev
     build:
       context: .
-      dockerfile: docker/development/Dockerfile
+      dockerfile: container/development/Dockerfile
     environment:
       TZ: Asia/Tokyo
     command: rails s

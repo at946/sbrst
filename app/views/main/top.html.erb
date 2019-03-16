@@ -1,71 +1,45 @@
-<div class="container my-5">
-  <%= image_tag 'logo_typeA.png', class: "d-block mx-auto mw-100" %>
-  <h1 class="text-center text-secondary h5">とりあえずブレストして、<br class="d-sm-block d-md-none">頭の中を整理しませんか？</h1>
-  <p class="text-center mb-4">
-    <a href="https://at-946.hatenablog.com/entry/2019/02/05/004647" class="text-success" target="_blank" rel="noopener noreferrer">How to Use</a>
-  </p>
-
-  <% if @setting.errors.present? %>
-    <div class="alert alert-warning" role="alert">
-      <% @setting.errors.messages.each do |attr, msg| %>
-        <p><%= @setting.errors.full_messages_for(attr).first %></p>
-      <% end %>
-    </div>
-  <% end %>
-
-  <%= form_with url: run_path, model: @setting, local: true do |form| %>
-    <div class="form-group">
-      <%= form.label :problem %>
-      <%= form.text_field :problem, class: "form-control", autofocus: true %>
-    </div>
-    <div class="form-group">
-      <%= form.label :limit_time %>
-      <div class="input-group">
-        <%= form.number_field :limit_time, class: "form-control", "aria-describedby": :limit_time_append, placeholder: "1 - 10" %>
-        <div class="input-group-append">
-          <span class="input-group-text" id="limit_time_append">分</span>
-        </div>
-      </div>
-    </div>
-    <%= form.submit "ブレストを始める", class: "btn btn-secondary d-block mx-auto mt-5 w-50", id: "start_brasto_button", style: "min-width: 200px;" %>
-  <% end %>
+<div id="eye_catch" class="vh-center">
+  <div style="position: absolute; top: 2rem; right: 2rem;">
+    <a class="fab fa-twitter mr-1 white-text center-align sns-icon" style="background-color: #55acee;" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=%E3%81%A8%E3%82%8A%E3%81%82%E3%81%88%E3%81%9A%E3%83%96%E3%83%AC%E3%82%B9%E3%83%88" target="_blank"></a>
+    <a class="fab fa-facebook-f white-text center-align sns-icon" style="background-color: #3B5998;" href="https://www.facebook.com/dialog/share?app_id=832453100439280&display=popup&href=https%3A%2F%2Fwww.toriaezu-brasto.tk" target="_blank"></a>
+  </div>
+  <div class="center-align">
+    <h1 id="top_title" class="white-text mb-2">とりあえず<br class="hide-on-med-and-up">ブレスト</h1>
+    <h5 class="white-text mb-5">Your answer is in Your head.</h5>
+    <%= link_to "ブレストを始める", set_path, class: "waves-effect waves-light btn", style: "width: 250px; border-radius: 10rem;" %>
+  </div>
+  <div class="center-align white-text" style="position: absolute; bottom: 1rem;">
+    <p>more info.</p>
+    <i class="fas fa-angle-double-down"></i>
+  </div>
 </div>
 
-<hr>
+<div class="bg-sticky">
+  <div class="container section center-align py-5">
+    <h5 class="font-851tegaki-zatsu" style="line-height: 3rem; font-weight: bold;">"とりあえずブレスト"は<br>ひとりで気軽に<br>ブレストできるサービスです。</h5>
+  </div>
+</div>
 
-<div class="container my-5">
-  <div class="row text-center">
-    <h2 class="col-12 mb-4">When to Use</h2>
-    <div class="col-md-4 my-3">
-      <h1 class="mb-3"><i class="far fa-lightbulb text-success"></i></h1>
-      <p>アイデアをブースト！</p>
-    </div>
-    <div class="col-md-4 my-3">
-      <h1 class="mb-3"><i class="fas fa-brain text-success"></i></h1>
-      <p>考え事を整理したい！</p>
-    </div>
-    <div class="col-md-4 my-3">
-      <h1 class="mb-3"><i class="far fa-angry text-success"></i></h1>
-      <p>ストレスを吐き出したい！</p>
+<div class="grey lighten-5">
+  <div class="container section center-align">
+    <h4 class="my-2">Features</h4>
+    <div class="row">
+      <%= render 'feature_card', title: "Simple", text: "直感的に使えるシンプルな操作性！" %>
+      <%= render 'feature_card', title: "Solo", text: "ひとりでブレストに没頭しよう！" %>
+      <%= render 'feature_card', title: "Share", text: "課題や結果をみんなと共有し合おう！" %>
     </div>
   </div>
 </div>
 
-<hr>
-
-<div class="container">
-  <div class="my-5 text-center">
-    <div class="my-2">
-      <h2 class="mb-3 d-inline">Share me<i class="fas fa-angle-double-right mx-3"></i></h2>
-      <a class="fab fa-twitter mx-1 h3" style="color: #55acee; text-decoration: none;" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=%E3%81%A8%E3%82%8A%E3%81%82%E3%81%88%E3%81%9A%E3%83%96%E3%83%AC%E3%82%B9%E3%83%88" target="_blank" rel="noopener noreferrer"></a>
-      <a class="fab fa-facebook mx-1 h3" style="color: #3B5998; text-decoration: none;" href="https://www.facebook.com/dialog/share?app_id=832453100439280&display=popup&href=https%3A%2F%2Fwww.toriaezu-brasto.tk" target="_blank" rel="noopener noreferrer"></a>
+<div class="yellow lighten-2">
+  <div class="container section center-align">
+    <h4 class="my-2">4 Rules</h4>
+    <div class="row mb-5">
+      <%= render 'rule_card', text_en: "Withhold criticism", text_jp: "判断・結論を出さない" %>
+      <%= render 'rule_card', text_en: "Welcome wild ideas", text_jp: "粗野な考えを歓迎する" %>
+      <%= render 'rule_card', text_en: "Go for quantity", text_jp: "量を重視する" %>
+      <%= render 'rule_card', text_en: "Combine and improve", text_jp: "アイデアを結合し発展させる" %>
     </div>
-    <div class="my-2">
-      <h2 class="mb-3 d-inline">Follow me<i class="fas fa-angle-double-right mx-3"></i></h2>
-      <a class="fab fa-twitter mx-1 h3" style="color: #55acee; text-decoration: none;" href="https://twitter.com/intent/follow?screen_name=at_946" target="_blank"></a>
-      <a class="fas fa-pencil-alt mx-1 h3 text-secondary" style="text-decoration: none;" href="https://at-946.hatenablog.com/" target="_blank"></a>
-    </div>
+    <%= link_to "ブレストを始める", set_path, class: "waves-effect waves-light btn mb-5", style: "width: 250px; border-radius: 10rem;" %>
   </div>
 </div>
-
-<%= render partial: "advertise" %>

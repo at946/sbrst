@@ -7,6 +7,13 @@ $(document).on 'turbolinks:load', ->
   interval = 1 * 1000
   group_count = 1
 
+  resize_eye_catch()
+  resize_main()
+
+  $(window).resize ->
+    resize_eye_catch()
+    resize_main()
+
   # ブレストページ：制限時間のカウントダウン
   if limit_time > 0
     cal_time(limit_time)
@@ -21,7 +28,7 @@ $(document).on 'turbolinks:load', ->
   $("#add_answer_form").submit ->
     ans = escape_html($("#answer").val().trim())
     if ans != ""
-      $("#answer_list").prepend("<li class='list-group-item'>" + ans + "</li>")
+      $("#answer_list").prepend("<div class='col s12 m6 l4'><div class='card my-1'><div class='card-content center-align'>" + ans + "</div></div></div>")
       $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
     document.getElementById("answer").focus()
     $("#answer").val("")
@@ -159,3 +166,16 @@ add_hashtag = ->
   if $("#change_hashtag_mode_icon").hasClass("active")
     return "#"
   return ""
+
+resize_eye_catch = ->
+  $("#eye_catch").css('height', $(window).height() + 'px')
+
+resize_main = ->
+  header_height = 0
+  footer_height = 0
+  if $("nav")[0]
+    header_height = $("nav").outerHeight()
+  if $("footer")[0]
+    footer_height = $("footer").outerHeight()
+  main_height = $(window).height() - (header_height + footer_height)
+  $("#main_content").css('min-height', main_height + 'px')

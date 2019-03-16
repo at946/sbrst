@@ -4,7 +4,7 @@ services:
     container_name: toriaezu-brasto-web-prod
     build:
       context: .
-      dockerfile: docker/production/Dockerfile
+      dockerfile: container/production/Dockerfile
     environment:
       RAILS_ENV: production
       TZ: Asia/Tokyo

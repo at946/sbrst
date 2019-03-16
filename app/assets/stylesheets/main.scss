@@ -1,3 +1,48 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#eye_catch {
+  background-color: color("yellow", "base");
+  background-image: image-url("eye_catch.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+
+#top_title {
+  font-family: '851tegaki_zatsu'!important;
+  font-weight: 900;
+  text-shadow: 0.3rem 0.3rem 0px rgba(0, 117, 194, 0.8);
+}
+
+.bg-sticky {
+  background-color: rgba(255,255,255,0.75);
+  background-image: image-url("sticky-notes.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+  background-blend-mode: overlay;
+}
+
+.vh-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sns-icon {
+  text-decoration: none;
+  height: 2rem!important;
+  width: 2rem!important;
+  line-height: 2rem!important;
+  border-radius: 1rem;
+}
+
+.marble-list {
+  li:nth-child(odd) {
+  }
+  li:nth-child(even) {
+    background-color: $primary-color;
+  }
+}
