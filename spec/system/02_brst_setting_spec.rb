@@ -22,16 +22,14 @@ feature '02_ブレストの条件を設定できること', type: :system, js: t
     expect(find("#setting_problem").value).to eq @problem
   end
 
-  scenario "【ブレスト設定ページ】で【ブレストしたいこと】が未入力の状態で【ブレストを始める】を選択した場合、
-            「ブレストしたいことを入力してください」とエラーが表示されること" do
+  scenario "【ブレスト設定ページ】で【ブレストしたいこと】が未入力の状態で【ブレストを始める】を選択した場合、「ブレストしたいことを入力してください」とエラーが表示されること" do
     visit set_path
     fill_in :setting_problem, with: ""
     click_on :start_brst_button
     expect(page).to have_text "ブレストしたいことを入力してください"
   end
 
-  scenario "【ブレスト設定ページ】で【ブレストしたいこと】が【半角スペース】または【全角スペース】のみの状態で【ブレストを始める】を選択した場合、
-            「ブレストしたいことを入力してください」とエラーが表示されること" do
+  scenario "【ブレスト設定ページ】で【ブレストしたいこと】が【半角スペース】または【全角スペース】のみの状態で【ブレストを始める】を選択した場合、「ブレストしたいことを入力してください」とエラーが表示されること" do
     visit set_path
     fill_in :setting_problem, with: " "
     click_on :start_brst_button
@@ -58,16 +56,14 @@ feature '02_ブレストの条件を設定できること', type: :system, js: t
     expect(find("#setting_limit_time").value).to eq ""
   end
 
-  scenario "【ブレスト設定ページ】で【制限時間】が未入力の状態で【ブレストを始める】を選択した場合、
-            「制限時間を入力してください」とエラーが表示されること" do
+  scenario "【ブレスト設定ページ】で【制限時間】が未入力の状態で【ブレストを始める】を選択した場合、「制限時間を入力してください」とエラーが表示されること" do
     visit set_path
     fill_in :setting_limit_time, with: ""
     click_on :start_brst_button
     expect(page).to have_text "制限時間を入力してください"
   end
 
-  scenario "【ブレスト設定ページ】で【制限時間】が0以下の状態で【ブレストを始める】を選択した場合、
-            「制限時間は1~10分の間で入力してください」とエラーが表示されること" do
+  scenario "【ブレスト設定ページ】で【制限時間】が0以下の状態で【ブレストを始める】を選択した場合、「制限時間は1~10分の間で入力してください」とエラーが表示されること" do
     visit set_path
     fill_in :setting_limit_time, with: 0
     click_on :start_brst_button
@@ -78,8 +74,7 @@ feature '02_ブレストの条件を設定できること', type: :system, js: t
     expect(page).not_to have_text "制限時間は1~10分の間で入力してください"
   end
 
-  scenario "【ブレスト設定ページ】で【制限時間】が11以上の状態で【ブレストを始める】を選択した場合、
-            「制限時間は1~10分の間で入力してください」とエラーが表示されること" do
+  scenario "【ブレスト設定ページ】で【制限時間】が11以上の状態で【ブレストを始める】を選択した場合、「制限時間は1~10分の間で入力してください」とエラーが表示されること" do
     visit set_path
     fill_in :setting_limit_time, with: 11
     click_on :start_brst_button
