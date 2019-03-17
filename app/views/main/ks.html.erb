@@ -1,9 +1,30 @@
-<div id="main_content">
-  <%= @problem %>
-  <% @answers.each do |ans| %>
-    <%= ans %>
-  <% end %>
-  <div class="center">
-    <%= link_to "FINISH", result_path, class: "waves-effect waves-light btn" %>
+<div id="main_content" class="grey lighten-5">
+  <div class="container">
+    <div class="section">
+      <div class="card">
+        <div class="card-content center-align">
+          <p class="card-title"><%= @problem %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <hr>
+      <p>No Category</p>
+      <div id="result_list" class="row">
+        <% @answers.each do |ans| %>
+          <div class="col s12 m6 l4">
+            <div class="card my-1 hoverable">
+              <div class="card-content center-align"><%= ans %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <hr>
+    </div>
+
+    <div class="section center">
+      <%= link_to "FINISH", result_path(problem: @problem, answers: @answers), id: :finish_ks_button, class: "waves-effect waves-light btn" %>
+    </div>
   </div>
 </div>

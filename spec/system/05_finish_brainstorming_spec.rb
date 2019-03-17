@@ -111,29 +111,4 @@ feature "06_制限時間がすぎる前にブレストを終了できること",
       expect(page).to have_text ans
     end
   end
-
-  # scenario "【ブレスト結果ページ】で【トップページ】で設定した【ブレストしたい課題】が表示されること" do
-  #   click_on :finish_brasto_button
-  #   page.driver.browser.switch_to.alert.accept
-  #   expect(page).to have_text @problem
-  # end
-  #
-  # scenario "【ブレストページ】で【answer list】がない状態で【ブレスト結果ページ】へ遷移した場合、【ブレスト結果ページ】で「何も思いつきませんでした...」と表示されること" do
-  #   click_on :finish_brasto_button
-  #   page.driver.browser.switch_to.alert.accept
-  #   expect(page).to have_text "何も思いつきませんでした..."
-  # end
-  #
-  # scenario "【ブレストページ】で【answer list】がある状態で【ブレスト結果ページ】へ遷移した場合、【ブレスト結果ページ】で【answer list】が表示されること" do
-  #   fill_in :answer, with: @answer1
-  #   click_on :add_button
-  #   fill_in :answer, with: @answer2
-  #   click_on :add_button
-  #   click_on :finish_brasto_button
-  #   page.driver.browser.switch_to.alert.accept
-  #   sleep 1
-  #   expect(find("#result_list").all("li").count).to eq 2
-  #   expect(find("#result_list").all("li")[0]).to have_text @answer1
-  #   expect(find("#result_list").all("li")[1]).to have_text @answer2
-  # end
 end

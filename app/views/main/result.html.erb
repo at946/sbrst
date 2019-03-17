@@ -1,18 +1,28 @@
-<div class="container mb-5">
-  <p class="h2 mt-5 mb-4 text-center text-secondary">おつかれさまでした</p>
-  <div class="card mb-4 p-4">
-    <p id="problem" class="mb-1 h5 text-center"><%= @problem %></p>
-    <p class="mb-3 h5 text-center"><i class="fas fa-chevron-down"></i></p>
+<div id="main_content" class="grey lighten-5">
+  <div class="container">
+    <div class="section">
+      <div class="card">
+        <div class="card-content center-align">
+          <p class="card-title"><%= @problem %></p>
+        </div>
+      </div>
+    </div>
 
-    <% if @answers.present? %>
-      <ul id="result_list" class="list-group">
+    <div class="section">
+      <hr>
+      <p class="center-align blue-text">No Category</p>
+      <div class="row">
         <% @answers.each do |ans| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center result-item" style="cursor: pointer;">
-            <span class="result-item-name"><%= ans %></span>
-            <span class="badge"><i class="fas fa-times delete-badge"></i></span>
-          </li>
+          <div class="col s12 m6 l4">
+            <div class="card my-1">
+              <div class="card-content center-align"><%= ans %></div>
+            </div>
+          </div>
         <% end %>
-      </ul>
+      </div>
+      <hr>
+    </div>
+
       <div class="mt-3 clearfix">
         <span class="float-left">
           <i id="change_hashtag_mode_icon" class="fas fa-hashtag mx-2 h4 text-secondary active" style="cursor: pointer;"></i>
@@ -23,11 +33,7 @@
           <i id="copy_icon" class="far fa-copy mx-2 h4" style="cursor: pointer;"></i>
         </span>
       </div>
-    <% else %>
-      <p class="text-center">何も思いつきませんでした...</p>
-    <% end %>
   </div>
-  <%= link_to "トップページ", root_path, id: "top_link", class: "btn btn-secondary w-50 d-block mx-auto", style: "min-width: 200px;", data: {"turbolinks": false} %>
 </div>
 
 <%= render partial: "advertise" %>
