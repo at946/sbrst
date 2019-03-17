@@ -29,7 +29,7 @@ feature '01_トップページにアクセスできること', type: :system, js
   end
 
   scenario "【KSページ】で【ロゴ】を選択した場合、【トップページ】へ遷移できること" do
-    visit ks_path
+    visit ks_path(answers: ["ans"])
     expect(current_path).to eq ks_path
     click_on :logo
     expect(current_path).to eq root_path
@@ -52,6 +52,13 @@ feature '01_トップページにアクセスできること', type: :system, js
   scenario "【プライバシーポリシーページ】で【ロゴ】を選択した場合、【トップページ】へ遷移できること" do
     visit pp_path
     expect(current_path).to eq pp_path
+    click_on :logo
+    expect(current_path).to eq root_path
+  end
+
+  scenario "【ブレスト失敗ページ】で【ロゴ】を選択した場合、【トップページ】へ遷移できること" do
+    visit brst_fail_path
+    expect(current_path).to eq brst_fail_path
     click_on :logo
     expect(current_path).to eq root_path
   end

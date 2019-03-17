@@ -1,0 +1,12 @@
+<div id="main_content" class="bg-sticky vh-center">
+  <div class="container">
+    <div class="card my-0">
+      <div class="card-content center">
+        <p class="mb-2">何も思いつかなかった...</p>
+        <%= link_to set_path(problem: @problem, limit_time: @limit_time), id: :retry_brst_button, class: "btn waves-effect waves-light" do %>
+        再挑戦<i class="material-icons left">history</i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,8 @@
 <div id="main_content">
+  <%= @problem %>
+  <% @answers.each do |ans| %>
+    <%= ans %>
+  <% end %>
   <div class="center">
     <%= link_to "FINISH", result_path, class: "waves-effect waves-light btn" %>
   </div>

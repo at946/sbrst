@@ -21,10 +21,11 @@
       <div class="section">
         <%= form_with url: ks_path, local: true, id: "result_form", method: :get do |form| %>
           <%= hidden_field_tag :problem, @setting.problem %>
+          <%= hidden_field_tag :limit_time, @setting.limit_time / 60000 %>
           <div id="post_answer_list"></div>
           <div class="center">
-            <button id="finish_brst_button" class="btn waves-effect waves-light" type="submit" value="finish" onclick="return confirm('ブレストを完了しますか？')">
-              <i class="material-icons left">check</i><span>ブレスト完了</span>
+            <button id="finish_brst_button" class="btn waves-effect waves-light" type="submit" onclick="return confirm('ブレストを完了しますか？')">
+              <i class="material-icons left">check</i><span>出し切った！</span>
             </button>
           </div>
         <% end %>
