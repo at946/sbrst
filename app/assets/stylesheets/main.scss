@@ -39,10 +39,6 @@
   border-radius: 1rem;
 }
 
-.marble-list {
-  li:nth-child(odd) {
-  }
-  li:nth-child(even) {
-    background-color: $primary-color;
-  }
+.pointer {
+  cursor: pointer;
 }

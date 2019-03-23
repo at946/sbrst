@@ -56,8 +56,8 @@ $(document).on 'turbolinks:load', ->
   show_category_name_form = (category_name) ->
     html = "
       <div class='mt-3 mb-1 show-category-name-wrapper'>
-        <span class='category-name center' onclick='edit_category($(this))'>#{category_name}</span>
-        <i class='material-icons right delete-category' onclick='delete_category($(this))'>close</i>
+        <span class='category-name pointer' onclick='edit_category($(this))'>#{category_name}</span>
+        <i class='material-icons right delete-category pointer' onclick='delete_category($(this))'>close</i>
       </div>
     "
     return html
@@ -75,13 +75,18 @@ $(document).on 'turbolinks:load', ->
 
   # アンサーの型
   show_answer_form = (answer) ->
-    html = "<div class='answer'><span onclick='edit_answer($(this))'>#{answer}</span></div>"
+    html = "
+      <div class='answer'>
+        <span class='pointer' onclick='edit_answer($(this))'>#{answer}</span>
+        <i class='material-icons right delete-answer pointer' onclick='delete_answer($(this))'>close</i>
+      </div>
+    "
 
   # アンサーフォームの型
   edit_answer_form = (answer) ->
     html = "
       <form id='answer_form'>
-        <div class='input-field mb-0'>
+        <div class='input-field my-0'>
           <input name='answer' id='answer_input' class='center-align' value=#{answer}>
         </div>
       </form>
@@ -129,7 +134,7 @@ $(document).on 'turbolinks:load', ->
   @edit_answer = (target) ->
     answer = target.text()
     target.parents("div .card-content").prepend(edit_answer_form(answer))
-    target.remove()
+    target.parents("div .answer").remove()
     $("#answer_input").focus()
 
     # アンサーの編集反映（Enter）
@@ -150,6 +155,10 @@ $(document).on 'turbolinks:load', ->
     target.parents("div .card-content").prepend(show_answer_form(answer))
     target.remove()
 
+  # アンサーの削除
+  @delete_answer = (target) ->
+    if confirm("'#{target.closest("div .answer").find("span").text()}'を削除しますか？")
+      target.closest("div .col").remove()
 
   # ブレスト結果ページ：リストを削除する
   $(".delete-badge").click ->

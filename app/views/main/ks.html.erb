@@ -20,8 +20,11 @@
         <% @answers.each do |ans| %>
           <div class="col s12 m6">
             <div class="card my-1 hoverable">
-              <div class="card-content center-align">
-                <div class="answer" onclick="edit_answer($(this))"><%= ans %></div>
+              <div class="card-content">
+                <div class="answer">
+                  <span class="pointer" onclick="edit_answer($(this))"><%= ans %></span>
+                  <i class="material-icons right delete-answer pointer" onclick="delete_answer($(this))">close</i>
+                </div>
               </div>
             </div>
           </div>
