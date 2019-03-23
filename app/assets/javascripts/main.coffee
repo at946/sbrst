@@ -3,8 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', ->
-  limit_time = $("#limit_time").text()
-  interval = 1 * 1000
   group_count = 1
 
   resize_eye_catch()
@@ -14,7 +12,11 @@ $(document).on 'turbolinks:load', ->
     resize_eye_catch()
     resize_main()
 
-  # ブレストページ：制限時間のカウントダウン
+  ########## BRST PAGE ##########
+  # 制限時間のカウントダウン
+  limit_time = $("#limit_time").text()
+  interval = 1 * 1000
+
   if limit_time > 0
     cal_time(limit_time)
     timer = setInterval ->
@@ -24,7 +26,7 @@ $(document).on 'turbolinks:load', ->
         clearInterval(timer)
     , interval
 
-  # ブレストページ：アンサーをアンサーリストへ追加
+  # アンサーをアンサーリストへ追加
   $("#add_answer_form").submit ->
     ans = escape_html($("#answer").val().trim())
     if ans != ""
@@ -34,13 +36,120 @@ $(document).on 'turbolinks:load', ->
     $("#answer").val("")
     return false
 
-  # ブレスト結果ページ：リストをドラッグ＆ドロップで入れ替える
-  if document.getElementById("result_list") != null
-    el = document.getElementById("result_list")
-    sortable = Sortable.create(el, {
-      animation: 150,
-      delay: 100
-      })
+  ########## KS PAGE ##########
+  sortable(document.getElementsByClassName("sortable-answer"), "answer")
+
+  # カテゴリーの型
+  category_form = (category_name) ->
+    html = "
+      <div class='category'>
+        <hr>
+        <div class='category-name-wrapper'>
+          #{show_category_name_form(category_name)}
+        </div>
+        <div class='row sortable-answer py-1 mb-0'></div>
+      </div>
+    "
+    return html
+
+  # カテゴリー名の型
+  show_category_name_form = (category_name) ->
+    html = "
+      <div class='mt-3 mb-1 show-category-name-wrapper'>
+        <span class='category-name center' onclick='edit_category($(this))'>#{category_name}</span>
+        <i class='material-icons right delete-category' onclick='delete_category($(this))'>close</i>
+      </div>
+    "
+    return html
+
+  # カテゴリー名フォームの型
+  edit_category_name_form = (category_name) ->
+    html = "
+      <form id='category_name_form'>
+        <div class='input-field mb-0'>
+          <input name='category_name' id='category_name' class='center-align' value=#{category_name}>
+        </div>
+      </form>
+    "
+    return html
+
+  # アンサーの型
+  show_answer_form = (answer) ->
+    html = "<div class='answer'><span onclick='edit_answer($(this))'>#{answer}</span></div>"
+
+  # アンサーフォームの型
+  edit_answer_form = (answer) ->
+    html = "
+      <form id='answer_form'>
+        <div class='input-field mb-0'>
+          <input name='answer' id='answer_input' class='center-align' value=#{answer}>
+        </div>
+      </form>
+    "
+    return html
+
+  # カテゴリーの追加
+  $("#add_category_button").click ->
+    $("#category_area").append(category_form("Category"))
+    sortable(document.getElementsByClassName("sortable-answer"), "answer")
+    sortable(document.getElementsByClassName("sortable-category"), "category")
+
+  # カテゴリーの削除
+  @delete_category = (target) ->
+    if confirm("'#{target.closest("div").find("span").text()}'カテゴリーを削除しますか？")
+      $("#no_category").prepend(target.closest("div .category").find("div .col"))
+      target.closest("div .category").remove()
+
+  # カテゴリー名の編集モード
+  @edit_category = (target) ->
+    category_name = target.text()
+    target.parents("div .category-name-wrapper").prepend(edit_category_name_form(category_name))
+    target.parents("div .show-category-name-wrapper").remove()
+    $("#category_name").focus()
+
+    # カテゴリー名の編集反映（Enter）
+    $("#category_name_form").submit ->
+      category_name = escape_html($(@).find("#category_name").val().trim())
+      if category_name != ""
+        show_category($(@), category_name)
+      else
+        $(@).find("#category_name").val("")
+      return false
+
+    # カテゴリー名の編集キャンセル（Focus out）
+    $("#category_name").focusout ->
+      show_category($(@).closest("form"), category_name)
+
+  # カテゴリー名の編集モード解除
+  show_category = (target, category_name) ->
+    target.parents("div .category-name-wrapper").prepend(show_category_name_form(category_name))
+    target.remove()
+
+  # アンサーの編集モード
+  @edit_answer = (target) ->
+    answer = target.text()
+    target.parents("div .card-content").prepend(edit_answer_form(answer))
+    target.remove()
+    $("#answer_input").focus()
+
+    # アンサーの編集反映（Enter）
+    $("#answer_form").submit ->
+      answer = escape_html($(@).find("#answer_input").val().trim())
+      if answer != ""
+        show_answer($(@), answer)
+      else
+        $(@).find("#answer_input").val("")
+      return false
+
+    # アンサーの編集キャンセル（Focus out）
+    $("#answer_input").focusout ->
+      show_answer($(@).closest("form"), answer)
+
+  # アンサーの編集モード解除
+  show_answer = (target, answer) ->
+    target.parents("div .card-content").prepend(show_answer_form(answer))
+    target.remove()
+
 
   # ブレスト結果ページ：リストを削除する
   $(".delete-badge").click ->
@@ -179,3 +288,15 @@ resize_main = ->
     footer_height = $("footer").outerHeight()
   main_height = $(window).height() - (header_height + footer_height)
   $("#main_content").css('min-height', main_height + 'px')
+
+# KSページ：アンサーをドラッグ＆ドロップできるようにする
+sortable = (els, group, color) ->
+  if els.length != 0
+    Array.prototype.filter.call(els, (el) ->
+      Sortable.create(el, {
+        delay: 100,
+        group: group,
+        ghostClass: "yellow",
+        animation: 300,
+      })
+    )

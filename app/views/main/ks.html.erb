@@ -8,23 +8,31 @@
       </div>
     </div>
 
+    <div id="category_area" class="sortable-category"></div>
+
+    <hr>
+
     <div class="section">
-      <hr>
-      <p>No Category</p>
-      <div id="result_list" class="row">
+      <div class="section center">
+        <button type="button" id="add_category_button" class="btn waves-effect waves-light yellow grey-text text-darken-4"><i class="material-icons left">add</i>Add Category</button>
+      </div>
+      <div id="no_category" class="row mb-0 sortable-answer">
         <% @answers.each do |ans| %>
-          <div class="col s12 m6 l4">
+          <div class="col s12 m6">
             <div class="card my-1 hoverable">
-              <div class="card-content center-align"><%= ans %></div>
+              <div class="card-content center-align">
+                <div class="answer" onclick="edit_answer($(this))"><%= ans %></div>
+              </div>
             </div>
           </div>
         <% end %>
       </div>
-      <hr>
     </div>
 
     <div class="section center">
-      <%= link_to "FINISH", result_path(problem: @problem, answers: @answers), id: :finish_ks_button, class: "waves-effect waves-light btn" %>
+      <%= link_to result_path(problem: @problem, answers: @answers), id: :finish_ks_button, class: "waves-effect waves-light btn" do %>
+        <i class="material-icons left">check</i>FINISH
+      <% end %>
     </div>
   </div>
 </div>
