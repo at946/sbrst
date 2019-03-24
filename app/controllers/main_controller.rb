@@ -24,6 +24,8 @@ class MainController < ApplicationController
 
   def result
     @problem = params[:problem]
+    @categories = params[:categories]
+    @categories = [] if @categories.blank?
     @answers = params[:answers]
     @answers = [] if @answers.blank?
   end

@@ -3,16 +3,16 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'turbolinks:load', ->
-  group_count = 1
-
-  resize_eye_catch()
+  ########## COMMON BEGIN ##########
+  # mainの高さ調節
   resize_main()
 
+  # mainの高さ調節（windowサイズ変更時）
   $(window).resize ->
-    resize_eye_catch()
     resize_main()
+  ########## COMMON END ##########
 
-  ########## BRST PAGE ##########
+  ########## BRST PAGE BEGIN ##########
   # 制限時間のカウントダウン
   limit_time = $("#limit_time").text()
   interval = 1 * 1000
@@ -30,13 +30,20 @@ $(document).on 'turbolinks:load', ->
   $("#add_answer_form").submit ->
     ans = escape_html($("#answer").val().trim())
     if ans != ""
-      $("#answer_list").prepend("<div class='col s12 m6 l4'><div class='card my-1'><div class='card-content center-align'>" + ans + "</div></div></div>")
+      $("#answer_list").prepend("
+        <div class='col s12'>
+          <div class='card my-1'>
+            <div class='card-content center-align'>" + ans + "</div>
+          </div>
+        </div>")
       $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
     document.getElementById("answer").focus()
     $("#answer").val("")
     return false
+  ########## BRST PAGE END ##########
 
-  ########## KS PAGE ##########
+  ########## KS PAGE BEGIN ##########
+  # アンサーカードのソータブル化
   sortable(document.getElementsByClassName("sortable-answer"), "answer")
 
   # カテゴリーの型
@@ -56,8 +63,9 @@ $(document).on 'turbolinks:load', ->
   show_category_name_form = (category_name) ->
     html = "
       <div class='mt-3 mb-1 show-category-name-wrapper'>
-        <span class='category-name pointer' onclick='edit_category($(this))'>#{category_name}</span>
-        <i class='material-icons right delete-category pointer' onclick='delete_category($(this))'>close</i>
+        <span class='category-name'>#{category_name}</span>
+        <i class='material-icons right delete-category pointer red-text' onclick='delete_category($(this))'>close</i>
+        <i class='material-icons right edit-category pointer blue-text' onclick='edit_category($(this))'>edit</i>
       </div>
     "
     return html
@@ -77,8 +85,9 @@ $(document).on 'turbolinks:load', ->
   show_answer_form = (answer) ->
     html = "
       <div class='answer'>
-        <span class='pointer' onclick='edit_answer($(this))'>#{answer}</span>
-        <i class='material-icons right delete-answer pointer' onclick='delete_answer($(this))'>close</i>
+        <span class='answer-text'>#{answer}</span>
+        <i class='material-icons right delete-answer pointer red-text' onclick='delete_answer($(this))'>close</i>
+        <i class='material-icons right edit-answer pointer blue-text' onclick='edit_answer($(this))'>edit</i>
       </div>
     "
 
@@ -107,10 +116,10 @@ $(document).on 'turbolinks:load', ->
 
   # カテゴリー名の編集モード
   @edit_category = (target) ->
-    category_name = target.text()
+    category_name = target.closest("div").find(".category-name").text()
     target.parents("div .category-name-wrapper").prepend(edit_category_name_form(category_name))
     target.parents("div .show-category-name-wrapper").remove()
-    $("#category_name").focus()
+    $("#category_name").select()
 
     # カテゴリー名の編集反映（Enter）
     $("#category_name_form").submit ->
@@ -132,10 +141,10 @@ $(document).on 'turbolinks:load', ->
 
   # アンサーの編集モード
   @edit_answer = (target) ->
-    answer = target.text()
+    answer = target.closest("div").find(".answer-text").text()
     target.parents("div .card-content").prepend(edit_answer_form(answer))
     target.parents("div .answer").remove()
-    $("#answer_input").focus()
+    $("#answer_input").select()
 
     # アンサーの編集反映（Enter）
     $("#answer_form").submit ->
@@ -159,6 +168,32 @@ $(document).on 'turbolinks:load', ->
   @delete_answer = (target) ->
     if confirm("'#{target.closest("div .answer").find("span").text()}'を削除しますか？")
       target.closest("div .col").remove()
+
+  # FINISHボタン選択でRESULT PAGEへ遷移
+  $("#finish_ks_button").click ->
+    categories = []
+    answers = []
+    $(".category").each ->
+      categories.push($(@).find(".category-name").text())
+      answers_in_category = []
+      $(@).find(".answer").each ->
+        answers_in_category.push($(@).find("span").text())
+      answers.push(answers_in_category)
+    $.each(categories, (i, category) ->
+      $("<input>").attr({
+        type: 'hidden',
+        name: "categories[#{i}]",
+        value: category
+        }).appendTo("#hidden_area")
+      $.each(answers[i], (j, answer) ->
+        $("<input>").attr({
+          type: 'hidden',
+          name: "answers[#{i}][]",
+          value: answer
+          }).appendTo("#hidden_area"))
+    )
+    $("#finish_ks_form").submit()
+  ########## KS PAGE END ##########
 
   # ブレスト結果ページ：リストを削除する
   $(".delete-badge").click ->
@@ -284,9 +319,6 @@ add_hashtag = ->
   if $("#change_hashtag_mode_icon").hasClass("active")
     return "#"
   return ""
-
-resize_eye_catch = ->
-  $("#eye_catch").css('height', $(window).height() + 'px')
 
 resize_main = ->
   header_height = 0

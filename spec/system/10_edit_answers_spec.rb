@@ -12,20 +12,12 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
     visit ks_path(problem: @problem, limit_time: @limit_time, answers: @answer)
 
     expect(all(".answer").count).to eq @answer.count
+    expect(page).not_to have_selector "#answer_form"
 
-    all(".answer")[0].click
-
-    expect(all(".answer").count).to eq @answer.count - 1
-
-    find("body").click
-    all(".answer")[1].click
+    all(".edit-answer")[0].click
 
     expect(all(".answer").count).to eq @answer.count - 1
-
-    find("body").click
-    all(".answer")[2].click
-
-    expect(all(".answer").count).to eq @answer.count - 1
+    expect(page).to have_selector "#answer_form"
   end
 
   scenario "【KSページ】で【編集モードのアンサー】で【Enter】を選択した場合、【アンサー】が更新されること" do
@@ -35,7 +27,7 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
       expect(all(".answer")[i]).to have_text @answer[i]
     end
 
-    all(".answer")[1].click
+    all(".edit-answer")[1].click
 
     expect(find("#answer_input").value).to eq @answer[1]
 
@@ -49,7 +41,7 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
     expect(all(".answer")[0]).to have_text @answer[0]
     expect(all(".answer")[1]).to have_text @new_answer
     expect(all(".answer")[2]).to have_text @answer[2]
-    expect(all("#answer_input").count).to eq 0
+    expect(page).not_to have_selector "#answer_form"
   end
 
   scenario "【KSページ】で【編集モードのアンサー】で【フォーカスアウト】した場合、アンサーの更新がキャンセルされること" do
@@ -59,20 +51,16 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
       expect(all(".answer")[i]).to have_text @answer[i]
     end
 
-    all(".answer")[1].click
-
+    all(".edit-answer")[1].click
     expect(find("#answer_input").value).to eq @answer[1]
-
     fill_in :answer_input, with: @new_answer
-
     expect(find("#answer_input").value).to eq @new_answer
-
-    find("body").click
+    all(".answer")[1].click
 
     expect(all(".answer").count).to eq @answer.count
     (0...@answer.count).each do |i|
       expect(all(".answer")[i]).to have_text @answer[i]
     end
-    expect(all("#answer_input").count).to eq 0
+    expect(page).not_to have_selector "#answer_form"
   end
 end

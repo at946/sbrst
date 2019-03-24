@@ -11,23 +11,15 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
   scenario "【KSページ】で【カテゴリ追加ボタン】を選択した場合、【カテゴリ】が追加されること" do
     visit ks_path(problem: @problem, limit_time: @limit_time, answers: @answer)
 
-    expect(all(".category").count).to eq 0
-
-    click_on :add_category_button
-
     expect(all(".category").count).to eq 1
 
     click_on :add_category_button
 
     expect(all(".category").count).to eq 2
-  end
 
-  scenario "【KSページ】で【アンサー】をドラッグ＆ドロップで並び替えできること" do
-    # monkey test
-  end
+    click_on :add_category_button
 
-  scenario "【KSページ】で【アンサー】をドラッグ＆ドロップでカテゴライズできること" do
-    # monkey test
+    expect(all(".category").count).to eq 3
   end
 
   scenario "【KSページ】で【カテゴリ名編集アイコン】を選択した場合、【カテゴリ名】が【編集モード】になりフォーカスされること" do
@@ -38,7 +30,7 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
     expect(all(".category-name").count).to eq 2
     expect(all("#category_name_form").count).to eq 0
 
-    all(".category-name")[0].click
+    all(".edit-category")[0].click
 
     expect(all(".category-name").count).to eq 1
     expect(all("#category_name_form").count).to eq 1
@@ -52,7 +44,7 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
     expect(all(".category-name")[0]).to have_text "Category"
     expect(all(".category-name")[1]).to have_text "Category"
 
-    all(".category-name")[0].click
+    all(".edit-category")[0].click
 
     expect(find("#category_name").value).to eq "Category"
 
@@ -76,7 +68,7 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
     expect(all(".category-name")[0]).to have_text "Category"
     expect(all(".category-name")[1]).to have_text "Category"
 
-    all(".category-name")[0].click
+    all(".edit-category")[0].click
 
     expect(find("#category_name").value).to eq "Category"
 
@@ -103,7 +95,7 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
   scenario "【カテゴリー削除ダイアログ】で「'カテゴリー名'カテゴリーを削除しますか？」と表示されること" do
     visit ks_path(problem: @problem, limit_time: @limit_time, answers: @answer)
     click_on :add_category_button
-    all(".category-name")[0].click
+    all(".edit-category")[0].click
     fill_in :category_name, with: @category_name
     find("#category_name").native.send_keys :return
 
@@ -127,10 +119,6 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
     expect(page).to have_text "Category"
   end
 
-  scenario "【KSページ】で【カテゴリ削除アイコン】を選択した場合、【カテゴリに所属しているアンサー】が【未カテゴライズ】に移動して【カテゴリ】が削除されること" do
-    # monkey test
-  end
-
   scenario "【KSページ】で【カテゴリー編集モード】の場合、【カテゴリー削除アイコン】が表示されないこと" do
     visit ks_path(problem: @problem, limit_time: @limit_time, answers: @answer)
 
@@ -138,7 +126,7 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
 
     expect(all(".delete-category").count).to eq 1
 
-    all(".category-name")[0].click
+    all(".edit-category")[0].click
 
     expect(all(".delete-category").count).to eq 0
   end

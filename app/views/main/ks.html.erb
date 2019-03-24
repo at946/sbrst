@@ -1,11 +1,7 @@
 <div id="main_content" class="grey lighten-5">
   <div class="container">
     <div class="section">
-      <div class="card">
-        <div class="card-content center-align">
-          <p class="card-title"><%= @problem %></p>
-        </div>
-      </div>
+      <%= render "problem_card", problem: @problem %>
     </div>
 
     <div id="category_area" class="sortable-category"></div>
@@ -16,14 +12,15 @@
       <div class="section center">
         <button type="button" id="add_category_button" class="btn waves-effect waves-light yellow grey-text text-darken-4"><i class="material-icons left">add</i>Add Category</button>
       </div>
-      <div id="no_category" class="row mb-0 sortable-answer">
+      <div id="no_category" class="row mb-0 sortable-answer category">
         <% @answers.each do |ans| %>
-          <div class="col s12 m6">
+          <div class="col s12">
             <div class="card my-1 hoverable">
               <div class="card-content">
                 <div class="answer">
-                  <span class="pointer" onclick="edit_answer($(this))"><%= ans %></span>
-                  <i class="material-icons right delete-answer pointer" onclick="delete_answer($(this))">close</i>
+                  <span class="answer-text"><%= ans %></span>
+                  <i class="material-icons right delete-answer pointer red-text" onclick="delete_answer($(this))">close</i>
+                  <i class="material-icons right edit-answer pointer blue-text" onclick="edit_answer($(this))">edit</i>
                 </div>
               </div>
             </div>
@@ -32,9 +29,14 @@
       </div>
     </div>
 
-    <div class="section center">
-      <%= link_to result_path(problem: @problem, answers: @answers), id: :finish_ks_button, class: "waves-effect waves-light btn" do %>
-        <i class="material-icons left">check</i>FINISH
+    <div class="section center pb-5">
+      <%= form_with url: result_path, id: :finish_ks_form, method: :get do |form| %>
+        <div id="hidden_area">
+          <input type="hidden" name="problem" value="<%= @problem %>" />
+        </div>
+        <button type="button" id="finish_ks_button" class="btn waves-effect waves-light" data-turbolinks="false">
+          <i class="material-icons left">check</i>FINISH
+        </button>
       <% end %>
     </div>
   </div>

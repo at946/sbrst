@@ -1,26 +1,25 @@
 <div id="main_content" class="grey lighten-5">
   <div class="container">
     <div class="section">
-      <div class="card">
-        <div class="card-content center-align">
-          <p class="card-title"><%= @problem %></p>
-        </div>
-      </div>
+      <%= render "problem_card", problem: @problem %>
     </div>
 
     <div class="section">
-      <hr>
-      <p class="center-align blue-text">No Category</p>
-      <div class="row">
-        <% @answers.each do |ans| %>
-          <div class="col s12 m6 l4">
-            <div class="card my-1">
-              <div class="card-content center-align"><%= ans %></div>
-            </div>
+      <% @categories.each do |category| %>
+        <hr>
+        <p class="center-align blue-text"><%= category[1] %></p>
+        <% if @answers[category[0]].present? %>
+          <div class="row">
+            <% @answers[category[0]].each do |ans| %>
+              <div class="col s12">
+                <div class="card my-1">
+                  <div class="card-content center-align"><%= ans %></div>
+                </div>
+              </div>
+            <% end %>
           </div>
         <% end %>
-      </div>
-      <hr>
+      <% end %>
     </div>
 
       <div class="mt-3 clearfix">

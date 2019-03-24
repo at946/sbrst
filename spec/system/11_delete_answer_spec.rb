@@ -13,7 +13,7 @@ feature "11_ユーザーとしてアンサーを削除したい", type: :system,
     page.driver.browser.switch_to.alert.dismiss
 
     expect(all(".delete-answer").count).to eq @answer.count
-    all(".answer")[0].find("span").click
+    all(".answer")[0].find(".edit-answer").click
     expect(all(".delete-answer").count).to eq @answer.count - 1
     find("body").click
     expect(all(".delete-answer").count).to eq @answer.count
@@ -29,7 +29,7 @@ feature "11_ユーザーとしてアンサーを削除したい", type: :system,
     page.driver.browser.switch_to.alert.dismiss
 
     expect(all(".delete-answer").count).to eq @answer.count
-    all(".answer")[0].find("span").click
+    all(".answer")[0].find(".edit-answer").click
     expect(all(".delete-answer").count).to eq @answer.count - 1
     find("body").click
     expect(all(".delete-answer").count).to eq @answer.count
@@ -47,7 +47,7 @@ feature "11_ユーザーとしてアンサーを削除したい", type: :system,
     expect(all(".answer").count).to eq @answer.count
 
     expect(all(".delete-answer").count).to eq @answer.count
-    all(".answer")[0].find("span").click
+    all(".answer")[0].find(".edit-answer").click
     expect(all(".delete-answer").count).to eq @answer.count - 1
     find("body").click
     expect(all(".delete-answer").count).to eq @answer.count
@@ -66,7 +66,7 @@ feature "11_ユーザーとしてアンサーを削除したい", type: :system,
     expect(all(".answer").count).to eq @answer.count - 1
 
     expect(all(".delete-answer").count).to eq @answer.count - 1
-    all(".answer")[0].find("span").click
+    all(".answer")[0].find(".edit-answer").click
     expect(all(".delete-answer").count).to eq @answer.count - 2
     find("body").click
     expect(all(".delete-answer").count).to eq @answer.count - 1
