@@ -173,95 +173,54 @@ $(document).on 'turbolinks:load', ->
   $("#finish_ks_button").click ->
     categories = []
     answers = []
+
     $(".category").each ->
       categories.push($(@).find(".category-name").text())
+
       answers_in_category = []
       $(@).find(".answer").each ->
-        answers_in_category.push($(@).find("span").text())
+        answers_in_category.push($(@).find(".answer-text").text())
+
       answers.push(answers_in_category)
+
+    if $("#no_category").find(".answer-text").length
+      categories.push("No Category")
+      answers_in_category = []
+      $("#no_category").find(".answer-text").each ->
+        answers_in_category.push($(@).text())
+      answers.push(answers_in_category)
+
     $.each(categories, (i, category) ->
-      $("<input>").attr({
-        type: 'hidden',
-        name: "categories[#{i}]",
-        value: category
-        }).appendTo("#hidden_area")
-      $.each(answers[i], (j, answer) ->
+      if category != "" || answers[i] != null
         $("<input>").attr({
           type: 'hidden',
-          name: "answers[#{i}][]",
-          value: answer
-          }).appendTo("#hidden_area"))
+          name: "categories[#{i}]",
+          value: category
+          }).appendTo("#hidden_area")
+        $.each(answers[i], (j, answer) ->
+          $("<input>").attr({
+            type: 'hidden',
+            name: "answers[#{i}][]",
+            value: answer
+            }).appendTo("#hidden_area"))
     )
     $("#finish_ks_form").submit()
   ########## KS PAGE END ##########
 
-  # ブレスト結果ページ：リストを削除する
-  $(".delete-badge").click ->
-    delete_result_item($(@))
-
-  # ブレスト結果ページ：カテゴリの追加
-  $(".result-item").click ->
-    $(@).before('
-      <li class="list-group-item d-flex justify-content-between align-items-center result-item bg-primary">
-        <strong>
-          <span class="result-item-name category-name">Group ' + group_count + '</span>
-        </strong>
-        <span class="badge text-dark">
-          <i class="far fa-edit edit-badge mr-3" data-toggle="modal" data-target="#category_name_modal"></i>
-          <i class="fas fa-times delete-badge"></i>
-        </span>
-      </li>
-    ')
-    group_count++
-    $(".delete-badge").click ->
-      delete_result_item($(@))
-    $(".edit-badge").click ->
-      $(".target-category").removeClass("target-category")
-      $(@).closest("li").addClass("target-category")
-      edit_category_name($(@))
-
-  # ブレスト結果ページ：editボタンが選択された場合、モーダルのinputがフォーカスされる
-  $('#category_name_modal').on 'shown.bs.modal', ->
-    $("#category_name_input").focus()
-
-  # ブレスト結果ページ：モーダルでEnter Keyを入力した場合、Saveボタンを選択したことにする
-  $("#category_name_form").submit ->
-    $("#category_name_modal_save").click()
-    return false
-
-  # ブレスト結果ページ：モーダルでSaveボタンを選択した場合、カテゴリー名が更新される
-  $("#category_name_modal_save").click ->
-    name = $("#category_name_input").val()
-    $(".target-category").find(".category-name").text(name)
-
-  # ブレスト結果ページ：クリップボードへのコピー
+  ########## RESULT PAGE BEGIN ##########
+  # クリップボードへのコピー
   $("#copy_icon").click ->
-    $("#copy_area").append('<p id="copy_target"></p>')
-    target = $("#copy_target")
-    target.append("「" + add_hashtag() + $("#problem").text() + "」<br><br>")
-    $("#result_list li").each ->
-      if $(@).find(".category-name").length
-        target.append("【" + add_hashtag() + $(@).find(".result-item-name").text() + "】<br>")
-      else
-        target.append("・ " + add_hashtag() + $(@).find(".result-item-name").text() + "<br>")
+    target = $("#copy_area")
+    target.removeClass("hide")
     target.select()
-    target_sp = document.getElementById("copy_target")
+    target_sp = document.getElementById("copy_area")
     range = document.createRange()
     range.selectNode(target_sp)
     window.getSelection().removeAllRanges()
     window.getSelection().addRange(range)
     document.execCommand("Copy")
-    target.remove()
+    target.addClass("hide")
     alert("ブレスト結果をコピーしました！")
-
-  # ブレスト結果ページ：Change Hashtag Mode
-  $("#change_hashtag_mode_icon").click ->
-    if $(@).hasClass("active")
-      $(@).removeClass("active text-secondary")
-      $(@).addClass("text-muted")
-    else
-      $(@).removeClass("text-muted")
-      $(@).addClass("active text-secondary")
 
   # ブレスト結果ページ：Twitterへのシェア
   $("#share_result_on_twitter").click ->
@@ -287,14 +246,9 @@ cal_time = (limit_time) ->
     $("#result_form").submit()
 
 sns_text = ->
-  text = "「" + escape_sns(add_hashtag() + $("#problem").text()) + "」%0a%0a"
-  $("#result_list li").each ->
-    if $(@).find(".category-name").length
-      text += "【" + escape_sns(add_hashtag() + $(@).find(".result-item-name").text()) + "】%0a"
-    else
-      text += "・%20" + escape_sns(add_hashtag() + $(@).find(".result-item-name").text()) + "%0a"
-  text += "%0a"
-  return text
+  target = $("#copy_area")
+  text = target.text()
+  return ascii(text)
 
 delete_result_item = (target) ->
   target.closest("li").remove()
@@ -310,6 +264,23 @@ escape_html = (str) ->
   str = str.replace(/'/g, '&#x27;')
   str = str.replace(/`/g, '&#x60;')
   return str
+
+ascii = (str) ->
+  str = str.replace(/%/g, '%25')
+  str = str.replace(/#/g, '%23')
+  str = str.replace(/&/g, '%26')
+  str = str.replace(/\+/g, '%2b')
+  str = str.replace(/;/g, '%3b')
+  str = str.replace(/\\/g, '%5c')
+  str = str.replace(/\^/g, '%5e')
+  str = str.replace(/`/g, '%60')
+  str = str.replace(/{/g, '%7b')
+  str = str.replace(/\|/g, '%7c')
+  str = str.replace(/}/g, '%7d')
+  str = str.replace(/\r?\n/g, '%0a')
+  return str
+
+
 
 escape_sns = (str) ->
   str = str.replace(/#/g, '%23')

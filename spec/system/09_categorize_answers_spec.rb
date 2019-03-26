@@ -11,15 +11,15 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
   scenario "【KSページ】で【カテゴリ追加ボタン】を選択した場合、【カテゴリ】が追加されること" do
     visit ks_path(problem: @problem, limit_time: @limit_time, answers: @answer)
 
+    expect(all(".category").count).to eq 0
+
+    click_on :add_category_button
+
     expect(all(".category").count).to eq 1
 
     click_on :add_category_button
 
     expect(all(".category").count).to eq 2
-
-    click_on :add_category_button
-
-    expect(all(".category").count).to eq 3
   end
 
   scenario "【KSページ】で【カテゴリ名編集アイコン】を選択した場合、【カテゴリ名】が【編集モード】になりフォーカスされること" do
