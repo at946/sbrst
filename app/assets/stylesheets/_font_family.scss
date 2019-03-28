@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'GenJyuuGothic';
+  src: font-url('GenJyuuGothic-Normal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '851tegaki_zatsu';
+  src: font-url('851tegaki_zatsu_normal_0883.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geotica';
+  src: font-url('Geotica_2012.otf') format('opentype');
+}
+
+.font-851tegaki-zatsu {
+  font-family: '851tegaki_zatsu'!important;
+}
+
+.font-geotica {
+  font-family: 'Geotica'!important;
+}

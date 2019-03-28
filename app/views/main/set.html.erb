@@ -1,0 +1,38 @@
+<div id="main_content" class="bg-sticky vh-center">
+  <div class="container">
+    <div class="card">
+      <div class="card-content">
+        <div class="mb-4">
+          <% if @setting.errors.present? %>
+            <div class="center-align red-text">
+              <% @setting.errors.full_messages.each do |msg| %>
+                <p><%= msg %></p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= form_with url: brst_path, model: @setting, local: true, method: :get do |form| %>
+
+          <div>
+            <div class="input-field mb-2">
+              <%= form.label :problem %>
+              <%= form.text_field :problem, class: "center-align", autofocus: true %>
+            </div>
+            <div class="input-field">
+              <label for="limit_time">制限時間(min)</label>
+              <%= form.number_field :limit_time, class: "center-align", placeholder: "1-10" %>
+            </div>
+          </div>
+
+          <div class="center">
+            <button id="start_brst_button" class="btn waves-effect waves-light" type="submit">
+              <span>ブレスト開始</span><i class="material-icons right">send</i>
+            </button>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

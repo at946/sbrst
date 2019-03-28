@@ -1,14 +1,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="「とりあえずブレスト」は、アイデア出しや頭の整理をしたい時に便利なブレストツールです。無料・登録不要でブレインストーミングでき、TwitterやFacebookで結果を簡単にシェアすることもできます。">
-<!-- OGP -->
-<meta property="og:title" content="とりあえずブレスト - シェアできる無料のブレインストーミングツール">
-<meta property="og:type" content="website">
-<meta property="og:description" content="「とりあえずブレスト」は、アイデア出しや頭の整理をしたい時に便利なブレストツールです。無料・登録不要でブレインストーミングでき、TwitterやFacebookで結果を簡単にシェアすることもできます。">
-<meta property="og:url" content="https://www.toriaezu-brasto.tk">
-<meta property="og:image" content=<%= image_url "toriaezu-brasto_ogp.png" %>>
-<meta name="twitter:card" content="summary">
-<!-- End OGP -->
+<meta name="description" content="「S-BRST」は、アイデア出しや頭の整理をしたい時に便利なひとりブレストツールです。無料・登録不要でブレインストーミングでき、TwitterやFacebookで結果を簡単にシェアすることができます。">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= favicon_link_tag 'favicon.ico' %>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <% if Rails.env.production? %>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

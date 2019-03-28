@@ -1,21 +1,28 @@
-@import "_valiables";
+@charset "UTF-8";
 
-@import "bootstrap";
+@import '_font_family';
+@import '_spaces';
+
+// Colors
+@import "materialize/components/color-variables";
+$primary-color: color("yellow", "base") !default;
+$secondary-color: color("blue", "base") !default;
+
+@import 'materialize';
+@import 'main';
 
 html, body {
   height: 100%;
   margin: 0;
+  font-family: 'GenJyuuGothic'!important;
+  color: #212121;
 }
 
-p {
-  padding: 0;
-  margin: 0;
+#logo {
+  font-family: 'geotica'!important;
+  // font-size: 1.3rem;
 }
 
-#top-background {
-  height: 100%;
-}
-
-.container {
-  max-width: 800px;
+.text-no-decoration {
+  text-decoration: none!important;
 }

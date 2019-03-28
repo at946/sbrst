@@ -1,40 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>とりあえずブレスト - シェアできる無料のブレインストーミングツール</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= render partial: "layouts/meta_tag", locals: { adsense: true } %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag 'favicon.ico' %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <%= render 'layouts/title' %>
+    <%= render "layouts/meta_tag", adsense: true %>
   </head>
 
-  <body class="d-flex flex-column h-100" cz-shortcut-listen="true">
-    <%= render partial: "layouts/body_tag" %>
-    <nav class="navbar bg-primary flex-shrink-0">
-      <%= link_to root_path, data: {"turbolinks": false} do %>
-        <%= image_tag 'logo_typeB.png', id: "logo", class: "navbar-brand p-0", style: "height: 36px;" %>
-      <% end %>
-    </nav>
+  <body>
+    <%= render "layouts/body_tag" %>
 
-    <main role="main" class="flex-shrink-0">
+    <%= render 'layouts/header' %>
+
+    <main>
       <%= yield %>
     </main>
 
-    <footer class="footer mt-auto py-2 bg-primary text-center text-muted">
-      <small>
-      <ul class="nav justify-content-center">
-        <li class="nav-item"><%= link_to "トップ", root_path, id: :fmenu_to_top, class: "nav-link text-reset", data: {"turbolinks": false} %></li>
-        <li class="nav-item"><%= link_to "利用規約", terms_of_service_path, id: :fmenu_to_tos, class: "nav-link text-reset" %></li>
-        <li class="nav-item"><%= link_to "プライバシーポリシー", privacy_policy_path, id: :fmenu_to_pp, class: "nav-link text-reset" %></li>
-      </ul>
-      <span>(c) 2019 at. All rights reserved.</span>
-      </small>
-    </footer>
+    <%= render 'layouts/footer' %>
+
   </body>
 
 </html>

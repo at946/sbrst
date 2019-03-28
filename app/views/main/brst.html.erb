@@ -1,0 +1,35 @@
+<div id="main_content" class="grey lighten-5">
+    <div class="container section">
+      <div class="section">
+        <div class="card">
+          <div class="card-content center-align">
+            <p id="limit_time" class="card-title"><%= @setting.limit_time %></p>
+            <p><%= @setting.problem %></p>
+          </div>
+        </div>
+
+      <div id="answer_area" class="py-2">
+        <form id="add_answer_form">
+          <div class="input-field">
+            <input type="text" id="answer" class="center-align" name="answer" autofocus>
+          </div>
+        </form>
+      </div>
+
+      <div id="answer_list" class="row"></div>
+
+      <div class="section">
+        <%= form_with url: ks_path, local: true, id: "result_form", method: :get do |form| %>
+          <%= hidden_field_tag :problem, @setting.problem %>
+          <%= hidden_field_tag :limit_time, @setting.limit_time / 60000 %>
+          <div id="post_answer_list"></div>
+          <div class="center">
+            <button id="finish_brst_button" class="btn waves-effect waves-light" type="submit" onclick="return confirm('ブレストを完了しますか？')">
+              <i class="material-icons left">check</i><span>出し切った！</span>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

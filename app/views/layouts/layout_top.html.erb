@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'layouts/title' %>
+    <%= render 'layouts/meta_tag', adsense: true %>
+    <%= render 'layouts/ogp' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/body_tag' %>
+
+    <main role="main" class="flex-shrink-0">
+      <%= yield %>
+    </main>
+
+    <%= render 'layouts/footer' %>
+  </body>
+
+</html>

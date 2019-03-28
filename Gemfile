@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'
-gem 'sassc'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -32,10 +32,9 @@ gem 'turbolinks', '~> 5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-# group :production do
-  gem 'exception_notification'
-  gem 'slack-notifier'
-# end
+# nofitication
+gem 'exception_notification'
+gem 'slack-notifier'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -68,9 +67,11 @@ gem 'pry-rails'
 gem 'hirb'
 gem 'hirb-unicode'
 
-# bootstrap
-gem 'bootstrap', '~> 4.2.1'
+# jquery
 gem 'jquery-rails'
 
 # Autoprefixer doesn’t support Node v4.8.2. Update it.
 gem 'mini_racer'
+
+# materialize
+gem 'materialize-sass'
