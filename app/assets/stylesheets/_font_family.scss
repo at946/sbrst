@@ -12,6 +12,15 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Geotica';
+  src: font-url('Geotica_2012.otf') format('opentype');
+}
+
 .font-851tegaki-zatsu {
   font-family: '851tegaki_zatsu'!important;
+}
+
+.font-geotica {
+  font-family: 'Geotica'!important;
 }

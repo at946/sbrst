@@ -18,12 +18,11 @@ html, body {
   color: #212121;
 }
 
-.text-no-decoration {
-  text-decoration: none!important;
+#logo {
+  font-family: 'geotica'!important;
+  // font-size: 1.3rem;
 }
 
-.header-logo {
-  font-size: 1.2rem!important;
-  font-weight: bold;
-  text-shadow: 0.1rem 0.1rem 0 white;
+.text-no-decoration {
+  text-decoration: none!important;
 }
