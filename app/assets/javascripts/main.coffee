@@ -225,14 +225,14 @@ $(document).on 'turbolinks:load', ->
   # ブレスト結果ページ：Twitterへのシェア
   $("#share_result_on_twitter").click ->
     window.open(
-      "https://twitter.com/intent/tweet?text=" + sns_text() + "&url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=S-BRST",
+      "https://twitter.com/intent/tweet?text=" + sns_text() + "&url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=SBRST",
       "_blank"
     )
 
   # ブレスト結果ページ：Facebookへのシェア
   $("#share_result_on_facebook").click ->
     window.open(
-      "https://www.facebook.com/dialog/share?app_id=832453100439280&display=popup&quote=" + sns_text() + "&href=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtag=#S-BRST",
+      "https://www.facebook.com/dialog/share?app_id=832453100439280&display=popup&quote=" + sns_text() + "&href=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtag=#SBRST",
       "_blank"
     )
 
