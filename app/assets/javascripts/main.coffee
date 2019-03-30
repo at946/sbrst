@@ -37,6 +37,7 @@ $(document).on 'turbolinks:load', ->
           </div>
         </div>")
       $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
+      $("#finish_brst_button").prop('disabled', false)
     document.getElementById("answer").focus()
     $("#answer").val("")
     return false
