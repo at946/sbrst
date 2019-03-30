@@ -19,7 +19,7 @@ class MainController < ApplicationController
     @problem = params[:problem]
     @limit_time = params[:limit_time]
     @answers = params[:answers]
-    redirect_to brst_fail_path(problem: @problem, limit_time: @limit_time) if @answers.blank?
+    render :brst_fail if @answers.blank?
   end
 
   def result
