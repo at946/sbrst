@@ -29,14 +29,14 @@ feature "05_制限時間がすぎる前にブレストを終了できること",
       find("#finish_brst_button").disabled?
     end
 
-    scenario "【アンサー】がある状態で【ブレスト完了確認ダイアログ】で【OK】を選択した場合、【KSページ】へ遷移すること" do
+    scenario "【アンサー】がある状態で【ブレスト完了確認ダイアログ】で【OK】を選択した場合、【まとめページ】へ遷移すること" do
       @answers.each do |ans|
         fill_in :answer, with: ans
         find("#answer").native.send_keys :return
       end
       click_on :finish_brst_button
       page.driver.browser.switch_to.alert.accept
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
     end
   end
 
@@ -65,7 +65,7 @@ feature "05_制限時間がすぎる前にブレストを終了できること",
     end
   end
 
-  feature "【KSページ】で", type: :system, js: true do
+  feature "【まとめページ】で", type: :system, js: true do
     background do
       visit root_path
       click_on :start_first_button
@@ -81,12 +81,12 @@ feature "05_制限時間がすぎる前にブレストを終了できること",
     end
 
     scenario "【ブレスト設定ページ】で設定した【ブレストしたい課題】が表示されること" do
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
       expect(page).to have_text @problem
     end
 
     scenario "【ブレストページ】で追加した【アンサー】が表示されること" do
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
       @answers.each do |ans|
         expect(page).to have_text ans
       end

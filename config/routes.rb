@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   post 'set',       to: 'main#set',       as: :set
   post 'brst',      to: 'main#brst',      as: :brst
-  post 'ks',         to: 'main#ks',        as: :ks
-  post 'result',     to: 'main#result',    as: :result
-  post 'brst_fail',  to: 'main#brst_fail', as: :brst_fail
+  post 'matome',    to: 'main#matome',    as: :matome
+  post 'result',    to: 'main#result',    as: :result
+  post 'brst_fail', to: 'main#brst_fail', as: :brst_fail
 
   get 'set'       => redirect("/")
   get 'brst'      => redirect("/")
-  get 'ks'        => redirect("/")
+  get 'matome'    => redirect("/")
   get 'result'    => redirect("/")
   get 'brst_fail' => redirect("/")
 

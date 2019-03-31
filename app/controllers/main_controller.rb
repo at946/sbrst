@@ -15,7 +15,7 @@ class MainController < ApplicationController
     end
   end
 
-  def ks
+  def matome
     @problem = params[:problem]
     @limit_time = params[:limit_time]
     @answers = params[:answers]
