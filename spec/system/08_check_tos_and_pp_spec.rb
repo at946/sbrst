@@ -73,7 +73,7 @@ feature "08_利用規約とプライバシーポリシーを確認したい", ty
     end
   end
 
-  feature "【KSページ】で", type: :system, js: true do
+  feature "【まとめページ】で", type: :system, js: true do
     background do
       visit root_path
       click_on :start_first_button
@@ -86,7 +86,7 @@ feature "08_利用規約とプライバシーポリシーを確認したい", ty
       end
       click_on :finish_brst_button
       page.driver.browser.switch_to.alert.accept
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
     end
 
     scenario "【フッターメニュー】の【利用規約】を選択した場合、【利用規約ページ】へ遷移すること" do
@@ -94,7 +94,7 @@ feature "08_利用規約とプライバシーポリシーを確認したい", ty
       expect(current_path).to eq tos_path
     end
 
-    scenario "【KSページ】で【フッターメニュー】の【プライバシーポリシー】を選択した場合、【プライバシーポリシーページ】へ遷移すること" do
+    scenario "【まとめページ】で【フッターメニュー】の【プライバシーポリシー】を選択した場合、【プライバシーポリシーページ】へ遷移すること" do
       click_on :fmenu_to_pp
       expect(current_path).to eq pp_path
     end
@@ -108,7 +108,7 @@ feature "08_利用規約とプライバシーポリシーを確認したい", ty
       fill_in :setting_limit_time, with: @limit_time
       click_on :start_brst_button
       sleep 65
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
       expect(page).to have_text "RETRY"
     end
 

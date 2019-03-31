@@ -18,7 +18,7 @@ feature "06_ブレストに再挑戦できること", type: :system, js: true do
     end
 
     scenario "【再挑戦】ボタンを選択した場合、【ブレスト設定ページ】へ遷移できること" do
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
       click_on :retry_brst_button
       expect(current_path).to eq set_path
     end

@@ -24,10 +24,11 @@ feature "04_制限時間がすぎるとブレストが終了すること", type:
 
     scenario "【アンサー】がない状態でタイマーが０秒になった場合、【ブレスト失敗ページ】へ遷移すること" do
       sleep 65
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
+      expect(page).to have_text "RETRY"
     end
 
-    scenario "【アンサー】がある状態でタイマーが０秒になった場合、【KSページ】へ遷移すること" do
+    scenario "【アンサー】がある状態でタイマーが０秒になった場合、【まとめページ】へ遷移すること" do
       @answers.each do |ans|
         fill_in :answer, with: ans
         find("#answer").native.send_keys :return
@@ -35,7 +36,7 @@ feature "04_制限時間がすぎるとブレストが終了すること", type:
 
       sleep 65
 
-      expect(current_path).to eq ks_path
+      expect(current_path).to eq matome_path
       expect(page).to have_text @problem
       @answers.each do |ans|
         expect(page).to have_text ans
