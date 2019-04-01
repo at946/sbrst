@@ -2,14 +2,15 @@
 <html>
   <head>
     <%= render 'layouts/title' %>
-    <%= render 'layouts/meta_tag', adsense: true %>
+    <%= render 'layouts/meta_tag' %>
     <%= render 'layouts/ogp' %>
+    <%= render 'layouts/gtm_head' %>
   </head>
 
   <body>
-    <%= render 'layouts/body_tag' %>
+    <%= render "layouts/gtm_body" %>
 
-    <main role="main" class="flex-shrink-0">
+    <main>
       <%= yield %>
     </main>
 
