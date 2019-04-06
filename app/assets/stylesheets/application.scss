@@ -7,8 +7,8 @@
 @import "materialize/components/color-variables";
 $primary-color: color("yellow", "base") !default;
 $secondary-color: color("blue", "base") !default;
-
 @import 'materialize';
+
 @import 'main';
 
 html, body {
@@ -21,6 +21,11 @@ html, body {
 #logo {
   font-family: 'geotica'!important;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
 }
 
 .text-no-decoration {

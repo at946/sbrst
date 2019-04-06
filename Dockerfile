@@ -1,7 +1,6 @@
-FROM ruby:2.5
+FROM ruby:2.6.1
 
 ENV LANG C.UTF-8
-ENV RAILS_ENV production
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
@@ -14,5 +13,5 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 WORKDIR /for_now_brainstorming
 COPY Gemfile /for_now_brainstorming/Gemfile
 COPY Gemfile.lock /for_now_brainstorming/Gemfile.lock
-RUN bundle install --without development test
+RUN bundle install
 COPY . /for_now_brainstorming
