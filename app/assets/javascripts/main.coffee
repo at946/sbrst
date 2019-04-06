@@ -53,7 +53,7 @@ $(document).on 'turbolinks:load', ->
       <div class='category'>
         <hr>
         <div class='category-name-wrapper'>
-          #{show_category_name_form(category_name)}
+          #{edit_category_name_form(category_name)}
         </div>
         <div class='row sortable-answer py-1 mb-0'></div>
       </div>
@@ -108,6 +108,9 @@ $(document).on 'turbolinks:load', ->
     $("#category_area").append(category_form("Category"))
     sortable(document.getElementsByClassName("sortable-answer"), "answer")
     sortable(document.getElementsByClassName("sortable-category"), "category")
+    submit_category_name()
+    focus_out_category_name("Category")
+    $("#category_name").select()
 
   # カテゴリーの削除
   @delete_category = (target) ->
@@ -121,8 +124,11 @@ $(document).on 'turbolinks:load', ->
     target.parents("div .category-name-wrapper").prepend(edit_category_name_form(category_name))
     target.parents("div .show-category-name-wrapper").remove()
     $("#category_name").select()
+    submit_category_name()
+    focus_out_category_name(category_name)
 
-    # カテゴリー名の編集反映（Enter）
+  # カテゴリー名の編集反映（Enter）
+  submit_category_name = ->
     $("#category_name_form").submit ->
       category_name = escape_html($(@).find("#category_name").val().trim())
       if category_name != ""
@@ -131,7 +137,8 @@ $(document).on 'turbolinks:load', ->
         $(@).find("#category_name").val("")
       return false
 
-    # カテゴリー名の編集キャンセル（Focus out）
+  # カテゴリー名の編集キャンセル（Focus out）
+  focus_out_category_name = (category_name) ->
     $("#category_name").focusout ->
       show_category($(@).closest("form"), category_name)
 
