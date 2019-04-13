@@ -4,13 +4,13 @@
       <%= render "problem_card", problem: @problem %>
     </div>
 
-    <div class="section">
-      <% @categories.each do |category| %>
-        <hr>
-        <h5 class="center-align blue-text my-2"><%= category[1] %></h5>
-        <% if @answers[category[0]].present? %>
-          <div class="row mb-0">
-            <% @answers[category[0]].each do |ans| %>
+    <% @categories.each do |i, category| %>
+      <hr>
+      <div class="section">
+        <h5 class="center-align blue-text my-2"><%= category %></h5>
+        <% if @answers[i].present? %>
+          <div class="row">
+            <% @answers[i].each do |ans| %>
               <div class="col s12">
                 <div class="card my-1">
                   <div class="card-content center-align"><%= ans %></div>
@@ -19,17 +19,56 @@
             <% end %>
           </div>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
 
     <div class="section center-align">
-      <h5>Share result</h5>
-      <div style="font-size: 3rem;">
-        <i id="share_result_on_twitter" class="fab fa-twitter mx-2" style="color: #55acee; text-decoration: none; cursor: pointer;"></i>
-        <i id="share_result_on_facebook" class="fab fa-facebook mx-2" style="color: #3B5998; text-decoration: none; cursor: pointer;"></i>
-        <i id="copy_icon" class="far fa-copy mx-2 h4" style="cursor: pointer;"></i>
+      <div class="mb-5">
+        <%= form_with url: matome_path, local: true, method: :get do |form| %>
+        <%= hidden_field_tag :problem, @problem %>
+        <%= hidden_field_tag :limit_time, @limit_time %>
+        <% @categories.each do |i, category| %>
+          <%= hidden_field_tag "categories[#{i}]", category %>
+          <% if @answers[i].present? %>
+            <% @answers[i].each do |ans| %>
+              <%= hidden_field_tag "answers[#{i}][]", ans %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <button id="matome_link" class="btn-large yellow blue-text">
+          <i class="material-icons left">edit</i>edit
+        </button>
+        <% end %>
+      </div>
+
+      <hr>
+
+      <div class="py-5">
+        <h5 class="mb-3 mt-0">RESULT SHARE</h5>
+        <div>
+          <i id="share_result_on_twitter" class="fab fa-twitter mx-2 sns-icon white-text z-depth-2 hoverable" style="background-color: #55acee;"></i>
+          <i id="share_result_on_facebook" class="fab fa-facebook-f mx-2 sns-icon white-text z-depth-2 hoverable" style="background-color: #3B5998;"></i>
+          <i id="copy_icon" class="far fa-copy mx-2 sns-icon white z-depth-2 hoverable"></i>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="section">
+        <div>
+          <%= link_to set_path(problem: @problem, limit_time: @limit_time), id: :set_link, class: "btn waves-effect waves-light mb-3 mt-4" do %>
+          <i class="material-icons left">replay</i>One More
+          <% end %>
+        </div>
+        <div>
+          <%= link_to root_path, id: :top_link, class: "btn grey waves-effect waves-light" do %>
+          <i class="material-icons left">arrow_back</i>To Top
+          <% end %>
+        </div>
       </div>
     </div>
+
 
   </div>
 </div>
@@ -41,10 +80,14 @@
 <pre>
 #<%= @problem %>
 
-<% @categories.each do |category| %>
-【<%= category[1] %>】
-<% if @answers[category[0]].present? %>
-<% @answers[category[0]].each do |ans| %>
+<% @categories.each do |i, category| %>
+<% if category != "" %>
+【<%= category %>】
+<% else %>
+----------
+<% end %>
+<% if @answers[i].present? %>
+<% @answers[i].each do |ans| %>
 ・<%= ans %>
 <% end %>
 <% end %>

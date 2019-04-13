@@ -6,22 +6,22 @@ feature '02_ブレストの条件を設定できること', type: :system, js: t
     @limit_time = 1
   end
 
-  scenario "【トップページ】で【ブレストする】ボタンを選択した場合、【ブレスト設定ページ】へ遷移できること" do
+  scenario "【トップページ】で【BRST_brst_start_first_button】を選択した場合、【ブレスト設定ページ】へ遷移できること" do
     visit root_path
-    click_on :start_first_button
-
+    click_on :brst_start_first_button
     expect(current_path).to eq set_path
+  end
 
+  scenario "【トップページ】で【BRST_START_SECOND_BUTTON】を選択した場合、【ブレスト設定ページ】へ遷移できること" do
     visit root_path
-    click_on :start_second_button
-
+    click_on :brst_start_second_button
     expect(current_path).to eq set_path
   end
 
   feature "【ブレスト設定ページ】で", type: :system, js: true do
     background do
       visit root_path
-      click_on :start_first_button
+      click_on :brst_start_first_button
     end
 
     scenario "【ブレストしたいこと】を入力できること" do
@@ -97,7 +97,7 @@ feature '02_ブレストの条件を設定できること', type: :system, js: t
   feature "【ブレストページ】で", type: :system, js: true do
     background do
       visit root_path
-      click_on :start_first_button
+      click_on :brst_start_first_button
       fill_in :setting_problem, with: @problem
       fill_in :setting_limit_time, with: @limit_time
       click_on :start_brst_button

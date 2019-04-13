@@ -12,7 +12,7 @@
           <% end %>
         </div>
 
-        <%= form_with url: brst_path, model: @setting, local: true do |form| %>
+        <%= form_with url: brst_path, model: @setting, local: true, method: :get do |form| %>
 
           <div>
             <div class="input-field mb-2">

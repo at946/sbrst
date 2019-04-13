@@ -10,7 +10,7 @@ feature "04_制限時間がすぎるとブレストが終了すること", type:
   feature "【ブレストページ】で", type: :system, js: true do
     background do
       visit root_path
-      click_on :start_first_button
+      click_on :brst_start_first_button
       fill_in :setting_problem, with: @problem
       fill_in :setting_limit_time, with: @limit_time
       click_on :start_brst_button
@@ -24,11 +24,11 @@ feature "04_制限時間がすぎるとブレストが終了すること", type:
 
     scenario "【アンサー】がない状態でタイマーが０秒になった場合、【ブレスト失敗ページ】へ遷移すること" do
       sleep 65
-      expect(current_path).to eq matome_path
+      expect(current_path).to eq result_path
       expect(page).to have_text "RETRY"
     end
 
-    scenario "【アンサー】がある状態でタイマーが０秒になった場合、【まとめページ】へ遷移すること" do
+    scenario "【アンサー】がある状態でタイマーが０秒になった場合、【ブレスト結果ページ】へ遷移すること" do
       @answers.each do |ans|
         fill_in :answer, with: ans
         find("#answer").native.send_keys :return
@@ -36,11 +36,19 @@ feature "04_制限時間がすぎるとブレストが終了すること", type:
 
       sleep 65
 
-      expect(current_path).to eq matome_path
+      expect(current_path).to eq result_path
       expect(page).to have_text @problem
       @answers.each do |ans|
         expect(page).to have_text ans
       end
+    end
+
+    scenario "【ブレスト結果ページ】で【ブレストページ】で追加した【アンサー】が表示されること" do
+      # 【アンサー】がある状態でタイマーが０秒になった場合、【ブレスト結果ページ】へ遷移すること　で確認
+    end
+
+    scenario "【ブレスト結果ページ】で設定した【ブレストしたいこと】が表示されること" do
+      # 【アンサー】がある状態でタイマーが０秒になった場合、【ブレスト結果ページ】へ遷移すること　で確認
     end
   end
 end

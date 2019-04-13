@@ -1,38 +1,77 @@
+<% count_categories = @categories.length %>
+
 <div id="main_content" class="grey lighten-5">
   <div class="container">
     <div class="section">
       <%= render "problem_card", problem: @problem %>
     </div>
 
-    <div id="category_area" class="sortable-category"></div>
+    <div id="category_area" class="sortable-category">
+      <% @categories.each do |i, category| %>
+        <% if i.to_i < count_categories - 1 %>
 
-    <hr>
-
-    <div class="section">
-      <div class="section center">
-        <button type="button" id="add_category_button" class="btn waves-effect waves-light yellow grey-text text-darken-4"><i class="material-icons left">add</i>Add Category</button>
-      </div>
-      <div id="no_category" class="row mb-0 sortable-answer">
-        <% @answers.each do |ans| %>
-          <div class="col s12">
-            <div class="card my-1 hoverable">
-              <div class="card-content">
-                <div class="answer">
-                  <span class="answer-text"><%= ans %></span>
-                  <i class="material-icons right delete-answer pointer red-text" onclick="delete_answer($(this))">close</i>
-                  <i class="material-icons right edit-answer pointer blue-text" onclick="edit_answer($(this))">edit</i>
-                </div>
+          <div class='category'>
+            <hr>
+            <div class='category-name-wrapper'>
+              <div class='mt-3 mb-1 show-category-name-wrapper'>
+                <span class='category-name'><%= category %></span>
+                <i class='material-icons right delete-category pointer red-text' onclick='delete_category($(this))'>close</i>
+                <i class='material-icons right edit-category pointer blue-text' onclick='edit_category($(this))'>edit</i>
               </div>
+            </div>
+            <div class='row sortable-answer py-1 mb-0'>
+              <% if @answers[i].present? %>
+                <% @answers[i].each do |ans| %>
+                  <div class="col s12">
+                    <div class="card my-1 hoverable">
+                      <div class="card-content">
+                        <div class="answer">
+                          <span class="answer-text"><%= ans %></span>
+                          <i class="material-icons right delete-answer pointer red-text" onclick="delete_answer($(this))">close</i>
+                          <i class="material-icons right edit-answer pointer blue-text" onclick="edit_answer($(this))">edit</i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+        <% elsif i.to_i == count_categories - 1 %>
+          </div>
+
+          <hr>
+          <div class="section">
+            <div class="section center">
+              <button type="button" id="add_category_button" class="btn waves-effect waves-light yellow grey-text text-darken-4"><i class="material-icons left">add</i>Add Category</button>
+            </div>
+            <div id="no_category" class="row mb-0 sortable-answer">
+              <% if @answers[i].present? %>
+                <% @answers[i].each do |ans| %>
+                  <div class="col s12">
+                    <div class="card my-1 hoverable">
+                      <div class="card-content">
+                        <div class="answer">
+                          <span class="answer-text"><%= ans %></span>
+                          <i class="material-icons right delete-answer pointer red-text" onclick="delete_answer($(this))">close</i>
+                          <i class="material-icons right edit-answer pointer blue-text" onclick="edit_answer($(this))">edit</i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
           </div>
         <% end %>
-      </div>
-    </div>
+      <% end %>
 
     <div class="section center pb-5">
-      <%= form_with url: result_path, id: :finish_ks_form do |form| %>
+      <%= form_with url: result_path, id: :finish_ks_form, method: :get do |form| %>
         <div id="hidden_area">
-          <input type="hidden" name="problem" value="<%= @problem %>" />
+          <%= hidden_field_tag :problem, @problem %>
+          <%= hidden_field_tag :limit_time, @limit_time %>
         </div>
         <button type="button" id="finish_ks_button" class="btn waves-effect waves-light" data-turbolinks="false">
           <i class="material-icons left">check</i>FINISH

@@ -1,6 +1,5 @@
 class MainController < ApplicationController
   def set
-    # @setting = Setting.new(params_setting)
     @setting = Setting.new(problem: params[:problem], limit_time: params[:limit_time])
   end
 
@@ -15,24 +14,27 @@ class MainController < ApplicationController
     end
   end
 
-  def matome
+  def brst_fail
     @problem = params[:problem]
     @limit_time = params[:limit_time]
-    @answers = params[:answers]
-    render :brst_fail if @answers.blank?
   end
 
   def result
     @problem = params[:problem]
-    @categories = params[:categories]
-    @categories = [] if @categories.blank?
-    @answers = params[:answers]
-    @answers = [] if @answers.blank?
+    @limit_time = params[:limit_time]
+    @categories = params[:categories].permit!.to_hash
+    if params[:answers].present?
+      @answers = params[:answers].permit!.to_hash
+    else
+      render :brst_fail if params[:answers].blank?
+    end
   end
 
-  def brst_fail
+  def matome
     @problem = params[:problem]
     @limit_time = params[:limit_time]
+    @categories = params[:categories].permit!.to_hash
+    @answers = params[:answers].permit!.to_hash
   end
 
   private

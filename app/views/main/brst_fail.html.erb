@@ -3,7 +3,7 @@
     <div class="card my-0">
       <div class="card-content center">
         <p class="mb-2">何も思いつかなかった...</p>
-        <%= form_with url: set_path, local: true do %>
+        <%= form_with url: set_path, local: true, method: :get do %>
           <%= hidden_field_tag :problem, @problem %>
           <%= hidden_field_tag :limit_time, @limit_time %>
           <button id="retry_brst_button" class="btn waves-effect waves-light">
