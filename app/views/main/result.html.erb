@@ -36,7 +36,7 @@
           <% end %>
         <% end %>
 
-        <button id="matome_link" class="btn-large yellow blue-text">
+        <button type="submit" id="matome_link" class="btn-large yellow blue-text" data-turbolinks="false">
           <i class="material-icons left">edit</i>edit
         </button>
         <% end %>
@@ -62,7 +62,7 @@
           <% end %>
         </div>
         <div>
-          <%= link_to root_path, id: :top_link, class: "btn grey waves-effect waves-light" do %>
+          <%= link_to root_path, id: :top_link, class: "btn grey waves-effect waves-light", "data-turbolinks": false do %>
           <i class="material-icons left">arrow_back</i>To Top
           <% end %>
         </div>
