@@ -36,16 +36,17 @@ $(document).on 'turbolinks:load', ->
             <div class='card-content center-align'>" + ans + "</div>
           </div>
         </div>")
-      $("#post_answer_list").append('<input type="hidden" name="answers[]" value="' + ans + '">')
+      $("#post_answer_list").append('<input type="hidden" name="answers[0][]" value="' + ans + '">')
       $("#finish_brst_button").prop('disabled', false)
     document.getElementById("answer").focus()
     $("#answer").val("")
     return false
   ########## BRST PAGE END ##########
 
-  ########## KS PAGE BEGIN ##########
+  ########## MATOME PAGE BEGIN ##########
   # アンサーカードのソータブル化
   sortable(document.getElementsByClassName("sortable-answer"), "answer")
+  sortable(document.getElementsByClassName("sortable-category"), "category")
 
   # カテゴリーの型
   category_form = (category_name) ->
@@ -191,12 +192,11 @@ $(document).on 'turbolinks:load', ->
 
       answers.push(answers_in_category)
 
-    if $("#no_category").find(".answer-text").length
-      categories.push("No Category")
-      answers_in_category = []
-      $("#no_category").find(".answer-text").each ->
-        answers_in_category.push($(@).text())
-      answers.push(answers_in_category)
+    categories.push("")
+    answers_in_category = []
+    $("#no_category").find(".answer-text").each ->
+      answers_in_category.push($(@).text())
+    answers.push(answers_in_category)
 
     $.each(categories, (i, category) ->
       if category != "" || answers[i] != null

@@ -10,15 +10,15 @@ feature "06_ブレストに再挑戦できること", type: :system, js: true do
   feature "【ブレスト失敗ページ】で", type: :system, js: true do
     background do
       visit root_path
-      click_on :start_first_button
+      click_on :brst_start_first_button
       fill_in :setting_problem, with: @problem
       fill_in :setting_limit_time, with: @limit_time
       click_on :start_brst_button
       sleep 65
     end
 
-    scenario "【再挑戦】ボタンを選択した場合、【ブレスト設定ページ】へ遷移できること" do
-      expect(current_path).to eq matome_path
+    scenario "【RETRY_BRST_BUTTON】ボタンを選択した場合、【ブレスト設定ページ】へ遷移できること" do
+      expect(current_path).to eq result_path
       click_on :retry_brst_button
       expect(current_path).to eq set_path
     end
