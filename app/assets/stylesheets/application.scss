@@ -31,3 +31,11 @@ html, body {
 .text-no-decoration {
   text-decoration: none!important;
 }
+
+.flex-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.h-100 { height: 100%!important; }
+.w-100 { width: 100%!important; }

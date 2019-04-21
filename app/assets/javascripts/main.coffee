@@ -31,11 +31,8 @@ $(document).on 'turbolinks:load', ->
     ans = escape_html($("#answer").val().trim())
     if ans != ""
       $("#answer_list").prepend("
-        <div class='col s12'>
-          <div class='card my-1'>
-            <div class='card-content center-align'>" + ans + "</div>
-          </div>
-        </div>")
+        <li class='collection-item py-2 center-align answer'>#{ans}</li>
+      ")
       $("#post_answer_list").append('<input type="hidden" name="answers[0][]" value="' + ans + '">')
       $("#finish_brst_button").prop('disabled', false)
     document.getElementById("answer").focus()
@@ -53,10 +50,10 @@ $(document).on 'turbolinks:load', ->
     html = "
       <div class='category'>
         <hr>
-        <div class='category-name-wrapper'>
+        <div class='category-name-wrapper mb-3 mt-5'>
           #{edit_category_name_form(category_name)}
         </div>
-        <div class='row sortable-answer py-1 mb-0'></div>
+        <ul class='sortable-answer collection mb-5'></ul>
       </div>
     "
     return html
@@ -64,11 +61,11 @@ $(document).on 'turbolinks:load', ->
   # カテゴリー名の型
   show_category_name_form = (category_name) ->
     html = "
-      <div class='mt-3 mb-1 show-category-name-wrapper'>
-        <span class='category-name'>#{category_name}</span>
+      <h6 class='show-category-name-wrapper center-align'>
+        <i class='material-icons left pointer handle'>reorder</i>
+        <span class='category-name yellow-text text-darken-4 pointer' onclick='edit_category($(this))'>#{category_name}</span>
         <i class='material-icons right delete-category pointer red-text' onclick='delete_category($(this))'>close</i>
-        <i class='material-icons right edit-category pointer blue-text' onclick='edit_category($(this))'>edit</i>
-      </div>
+      </h6>
     "
     return html
 
@@ -87,9 +84,9 @@ $(document).on 'turbolinks:load', ->
   show_answer_form = (answer) ->
     html = "
       <div class='answer'>
-        <span class='answer-text'>#{answer}</span>
+        <i class='material-icons left pointer handle'>reorder</i>
+        <span class='answer-text pointer' onclick='edit_answer($(this))'>#{answer}</span>
         <i class='material-icons right delete-answer pointer red-text' onclick='delete_answer($(this))'>close</i>
-        <i class='material-icons right edit-answer pointer blue-text' onclick='edit_answer($(this))'>edit</i>
       </div>
     "
 
@@ -116,14 +113,14 @@ $(document).on 'turbolinks:load', ->
   # カテゴリーの削除
   @delete_category = (target) ->
     if confirm("'#{target.closest("div").find("span").text()}'カテゴリーを削除しますか？")
-      $("#no_category").prepend(target.closest("div .category").find("div .col"))
+      $("#no_category").prepend(target.closest("div .category").find("li"))
       target.closest("div .category").remove()
 
   # カテゴリー名の編集モード
   @edit_category = (target) ->
-    category_name = target.closest("div").find(".category-name").text()
-    target.parents("div .category-name-wrapper").prepend(edit_category_name_form(category_name))
-    target.parents("div .show-category-name-wrapper").remove()
+    category_name = target.text()
+    target.parents(".category-name-wrapper").prepend(edit_category_name_form(category_name))
+    target.parents(".show-category-name-wrapper").remove()
     $("#category_name").select()
     submit_category_name()
     focus_out_category_name(category_name)
@@ -150,8 +147,8 @@ $(document).on 'turbolinks:load', ->
 
   # アンサーの編集モード
   @edit_answer = (target) ->
-    answer = target.closest("div").find(".answer-text").text()
-    target.parents("div .card-content").prepend(edit_answer_form(answer))
+    answer = target.text()
+    target.parents("li").prepend(edit_answer_form(answer))
     target.parents("div .answer").remove()
     $("#answer_input").select()
 
@@ -170,13 +167,13 @@ $(document).on 'turbolinks:load', ->
 
   # アンサーの編集モード解除
   show_answer = (target, answer) ->
-    target.parents("div .card-content").prepend(show_answer_form(answer))
+    target.parents("li").prepend(show_answer_form(answer))
     target.remove()
 
   # アンサーの削除
   @delete_answer = (target) ->
-    if confirm("'#{target.closest("div .answer").find("span").text()}'を削除しますか？")
-      target.closest("div .col").remove()
+    if confirm("'#{target.closest("div").find(".answer-text").text()}'を削除しますか？")
+      target.closest("li").remove()
 
   # FINISHボタン選択でRESULT PAGEへ遷移
   $("#finish_ks_button").click ->
@@ -317,6 +314,7 @@ sortable = (els, group, color) ->
         delay: 100,
         group: group,
         ghostClass: "yellow",
-        animation: 300,
+        animation: 200,
+        handle: ".handle",
       })
     )

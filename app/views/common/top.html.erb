@@ -1,7 +1,7 @@
 <div id="eye_catch" class="vh-center">
   <div class="center-align">
     <div><%= svg_tag "hero_logo.svg", class: "logo" %></div>
-    <%= link_to "ブレストを始める", set_path, id: :brst_start_first_button, class: "waves-effect waves-light btn", style: "width: 250px; border-radius: 10rem;" %>
+    <%= link_to "Let's START", set_path, id: :brst_start_first_button, class: "waves-effect waves-light btn blue py-1", style: "width: 250px; border-radius: 10rem; font-size: 1.2rem; height: 100%;" %>
     <div class="mt-5">
       <a id="share_twitter_icon" class="fab fa-twitter mx-1 white-text center-align sns-icon" style="background-color: #55acee;" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.toriaezu-brasto.tk&hashtags=SBRST" target="_blank"></a>
       <a class="fab fa-facebook-f mx-1 white-text center-align sns-icon" style="background-color: #3B5998;" href="https://www.facebook.com/dialog/share?app_id=832453100439280&display=popup&href=https%3A%2F%2Fwww.toriaezu-brasto.tk" target="_blank"></a>
@@ -15,32 +15,30 @@
 
 <%= render "layouts/advertise" %>
 
-<div class="bg-sticky">
-  <div class="container section center-align py-5">
-    <h5 class="font-851tegaki-zatsu" style="line-height: 3rem; font-weight: bold;">"とりあえずブレスト"は<br>ひとりで気軽に<br>ブレストできるサービスです。</h5>
+<div id="second_eye_catch">
+  <div class="container py-5">
+    <h4 class="mb-5 yellow-text">About me.</h4>
+    <p class="flow-text"><b>S-BRST</b> は <b>シンプルなひとりブレインストーミングツール</b> です。</p>
+    <p class="flow-text">ブレインストーミング（ブレスト）とは、あるテーマに対して頭の中にある全てを出し尽くすように文字に起こしまくる発想法で、思考整理やアイデア出しに有効なテクニックです。</p>
+    <p class="flow-text">S-BRST は <b>Your answer is in You.</b> をコンセプトに、ひとりで集中して自分の中の答えをアウトプットするためのサービスです。</p>
   </div>
 </div>
 
 <div class="grey lighten-5">
-  <div class="container section center-align">
-    <h4 class="my-2">3 Features</h4>
-    <div class="row">
-      <%= render 'feature_card', title: "Simple", text: "直感的な操作性！" %>
-      <%= render 'feature_card', title: "Solo",   text: "ひとりでじっくり！" %>
-      <%= render 'feature_card', title: "Share",  text: "みんなと共有！" %>
+  <div class="container py-5">
+    <h4 class="center-align mt-5">ブレインストーミングの４つの原則</h4>
+    <p class="center-align">ブレインストーミングを効率的に行うための約束ごとです。</p>
+
+    <div class="row mb-5 flex-eq-height">
+      <%= render 'rule_card', order: "first-rule", text_en: "Withhold criticism", text_jp: "結論厳禁", advise: "ブレインストーミングの間はとにかくアウトプットに集中する。あれはいい、これはだめを考えるのはそのあと。何かを判断しようとしてアウトプットにブレーキをかけないように！" %>
+      <%= render 'rule_card', order: "second-rule", text_en: "Welcome wild ideas", text_jp: "自由奔放", advise: "突拍子もない思考・アイデアこそ目の前の課題を突破する武器になります。誰かに言うのもためらうようなアウトプットを率先して出していきましょう！" %>
+      <%= render 'rule_card', order: "third-rule", text_en: "Go for quantity", text_jp: "質より量", advise: "ブレインストーミングではまず量を求めます。アウトプットしてアウトプットして、質を求めるのはアウトプットしきってからでも遅くないです！" %>
+      <%= render 'rule_card', order: "forth-rule", text_en: "Combine and improve", text_jp: "便乗歓迎", advise: "アウトプットが浮かばない？そんな時は今までのアウトプットを少し見返してみてください！アウトプットの足し算・引き算・掛け算で新しいアウトプットを出し続けましょう！" %>
+    </div>
+    <div class="center-align">
+      <%= link_to "Let's START", set_path, id: :brst_start_second_button, class: "waves-effect waves-light btn yellow darken-4 py-1", style: "width: 250px; border-radius: 10rem; font-size: 1.2rem; height: 100%;" %>
     </div>
   </div>
 </div>
 
-<div class="yellow">
-  <div class="container section center-align">
-    <h4 class="my-2">4 Rules</h4>
-    <div class="row mb-5">
-      <%= render 'rule_card', text_en: "Withhold criticism", text_jp: "判断・結論を出さない" %>
-      <%= render 'rule_card', text_en: "Welcome wild ideas", text_jp: "粗野な考えを歓迎する" %>
-      <%= render 'rule_card', text_en: "Go for quantity", text_jp: "量を重視する" %>
-      <%= render 'rule_card', text_en: "Combine and improve", text_jp: "アイデアを結合し発展させる" %>
-    </div>
-    <%= link_to "ブレストを始める", set_path, id: :brst_start_second_button, class: "waves-effect waves-light btn mb-5", style: "width: 250px; border-radius: 10rem;" %>
-  </div>
-</div>
+<%= render "layouts/advertise" %>

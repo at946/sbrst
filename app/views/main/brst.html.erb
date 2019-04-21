@@ -1,12 +1,12 @@
 <div id="main_content" class="grey lighten-5">
     <div class="container section">
       <div class="section">
-        <div class="card">
-          <div class="card-content center-align">
-            <p id="limit_time" class="card-title"><%= @setting.limit_time %></p>
-            <p><%= @setting.problem %></p>
-          </div>
-        </div>
+        <!-- <div class="card"> -->
+          <!-- <div class="card-content center-align"> -->
+            <h4 id="limit_time" class="center-align"><%= @setting.limit_time %></h4>
+            <h4 class="center-align blue-text"><%= @setting.problem %></h4>
+          <!-- </div> -->
+        <!-- </div> -->
 
       <div id="answer_area" class="py-2">
         <form id="add_answer_form">
@@ -16,7 +16,7 @@
         </form>
       </div>
 
-      <div id="answer_list" class="row"></div>
+      <ul id="answer_list" class="collection"></ul>
 
       <div class="section">
         <%= form_with url: result_path, local: true, id: "result_form", method: :get do |form| %>

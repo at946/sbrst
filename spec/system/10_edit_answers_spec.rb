@@ -26,7 +26,7 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
 
     scenario "【アンサーの編集アイコン】を選択した場合、【アンサー】が【編集モード】になりフォーカスされること" do
       expect(page).not_to have_selector "#answer_form"
-      all(".answer")[0].find(".edit-answer").click
+      all(".answer")[0].find(".answer-text").click
       expect(page).to have_selector "#answer_form"
     end
 
@@ -35,7 +35,7 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
         expect(page).to have_text ans
       end
 
-      all(".answer")[0].find(".edit-answer").click
+      all(".answer")[0].find(".answer-text").click
       fill_in :answer_input, with: @new_answer
       find("#answer_input").native.send_keys :return
 
@@ -50,7 +50,7 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
         expect(page).to have_text ans
       end
 
-      all(".answer")[0].find(".edit-answer").click
+      all(".answer")[0].find(".answer-text").click
       fill_in :answer_input, with: @new_answer
       find("body").click
 

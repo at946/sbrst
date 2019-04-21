@@ -50,7 +50,7 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
     click_on :add_category_button
     find("#category_name").native.send_keys :return
     expect(page).to have_text "Category"
-    find(".category").find(".edit-category").click
+    find(".category").find(".category-name").click
     fill_in :category_name, with: @category_name
     find("body").click
     expect(page).to have_text "Category"
@@ -61,7 +61,7 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
     click_on :add_category_button
     find("#category_name").native.send_keys :return
     expect(page).not_to have_selector("#category_name_form")
-    find(".category").find(".edit-category").click
+    find(".category").find(".category-name").click
     expect(page).to have_selector("#category_name_form")
   end
 
@@ -97,9 +97,9 @@ feature "09_ユーザーとして、アンサーをカテゴライズしたい",
     fill_in :category_name, with: @category_name
     find("#category_name").native.send_keys :return
     expect(find(".category")).to have_selector ".delete-category"
-    expect(find(".category")).to have_selector ".edit-category"
-    find(".category").find(".edit-category").click
+    expect(find(".category")).to have_selector ".category-name"
+    find(".category").find(".category-name").click
     expect(find(".category")).not_to have_selector ".delete-category"
-    expect(find(".category")).not_to have_selector ".edit-category"
+    expect(find(".category")).not_to have_selector ".category-name"
   end
 end
