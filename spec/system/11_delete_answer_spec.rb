@@ -50,7 +50,7 @@ feature "11_ユーザーとしてアンサーを削除したい", type: :system,
 
     scenario "【編集モードのアンサー】に【削除アイコン】が表示されないこと" do
       expect(all(".delete-answer").count).to eq @answers.count
-      all(".answer")[0].find(".edit-answer").click
+      all(".answer")[0].find(".answer-text").click
       expect(all(".delete-answer").count).to eq @answers.count - 1
     end
   end

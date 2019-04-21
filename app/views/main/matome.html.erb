@@ -3,7 +3,7 @@
 <div id="main_content" class="grey lighten-5">
   <div class="container">
     <div class="section">
-      <%= render "problem_card", problem: @problem %>
+      <h4 class="center-align blue-text"><%= @problem %></h4>
     </div>
 
     <div id="category_area" class="sortable-category">
@@ -12,30 +12,26 @@
 
           <div class='category'>
             <hr>
-            <div class='category-name-wrapper'>
-              <div class='mt-3 mb-1 show-category-name-wrapper'>
-                <span class='category-name'><%= category %></span>
+            <div class='category-name-wrapper mb-3 mt-5'>
+              <h6 class='show-category-name-wrapper center-align'>
+                <i class='material-icons left pointer handle'>reorder</i>
+                <span class='category-name yellow-text text-darken-4 pointer' onclick='edit_category($(this))'><%= category %></span>
                 <i class='material-icons right delete-category pointer red-text' onclick='delete_category($(this))'>close</i>
-                <i class='material-icons right edit-category pointer blue-text' onclick='edit_category($(this))'>edit</i>
-              </div>
+              </h6>
             </div>
-            <div class='row sortable-answer py-1 mb-0'>
+            <ul class="sortable-answer collection mb-5">
               <% if @answers[i].present? %>
                 <% @answers[i].each do |ans| %>
-                  <div class="col s12">
-                    <div class="card my-1 hoverable">
-                      <div class="card-content">
-                        <div class="answer">
-                          <span class="answer-text"><%= ans %></span>
-                          <i class="material-icons right delete-answer pointer red-text" onclick="delete_answer($(this))">close</i>
-                          <i class="material-icons right edit-answer pointer blue-text" onclick="edit_answer($(this))">edit</i>
-                        </div>
-                      </div>
-                    </div>
+                <li class='collection-item py-2 center-align'>
+                  <div class='answer'>
+                    <i class='material-icons left pointer handle'>reorder</i>
+                    <span class='answer-text pointer' onclick='edit_answer($(this))'><%= ans %></span>
+                    <i class='material-icons right delete-answer pointer red-text' onclick='delete_answer($(this))'>close</i>
                   </div>
+                </li>
                 <% end %>
               <% end %>
-            </div>
+            </ul>
           </div>
 
         <% elsif i.to_i == count_categories - 1 %>
@@ -46,23 +42,21 @@
             <div class="section center">
               <button type="button" id="add_category_button" class="btn waves-effect waves-light yellow grey-text text-darken-4"><i class="material-icons left">add</i>Add Category</button>
             </div>
-            <div id="no_category" class="row mb-0 sortable-answer">
-              <% if @answers[i].present? %>
-                <% @answers[i].each do |ans| %>
-                  <div class="col s12">
-                    <div class="card my-1 hoverable">
-                      <div class="card-content">
-                        <div class="answer">
-                          <span class="answer-text"><%= ans %></span>
-                          <i class="material-icons right delete-answer pointer red-text" onclick="delete_answer($(this))">close</i>
-                          <i class="material-icons right edit-answer pointer blue-text" onclick="edit_answer($(this))">edit</i>
-                        </div>
+            <!-- <div id="no_category"> -->
+              <ul id="no_category" class="collection sortable-answer">
+                <% if @answers[i].present? %>
+                  <% @answers[i].each do |ans| %>
+                    <li class='collection-item py-2 center-align'>
+                      <div class='answer'>
+                        <i class='material-icons left pointer handle'>reorder</i>
+                        <span class='answer-text pointer' onclick='edit_answer($(this))'><%= ans %></span>
+                        <i class='material-icons right delete-answer pointer red-text' onclick='delete_answer($(this))'>close</i>
                       </div>
-                    </div>
-                  </div>
+                    </li>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
+              </ul>
+            <!-- </div> -->
           </div>
         <% end %>
       <% end %>

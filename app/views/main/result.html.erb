@@ -1,23 +1,21 @@
 <div id="main_content" class="grey lighten-5">
   <div class="container">
     <div class="section">
-      <%= render "problem_card", problem: @problem %>
+      <h4 class="center-align blue-text"><%= @problem %></h4>
     </div>
 
     <% @categories.each do |i, category| %>
       <hr>
       <div class="section">
-        <h5 class="center-align blue-text my-2"><%= category %></h5>
+        <% if category != "" %>
+          <h6 class="yellow-text text-darken-4 center-align mb-3"><%= category %></h6>
+        <% end %>
         <% if @answers[i].present? %>
-          <div class="row">
+          <ul class="collection">
             <% @answers[i].each do |ans| %>
-              <div class="col s12">
-                <div class="card my-1">
-                  <div class="card-content center-align"><%= ans %></div>
-                </div>
-              </div>
+              <li class="collection-item py-2 center-align"><%= ans %></li>
             <% end %>
-          </div>
+          </ul>
         <% end %>
       </div>
     <% end %>
@@ -36,8 +34,8 @@
           <% end %>
         <% end %>
 
-        <button type="submit" id="matome_link" class="btn-large yellow blue-text" data-turbolinks="false">
-          <i class="material-icons left">edit</i>edit
+        <button type="submit" id="matome_link" class="btn-large yellow grey-text text-darken-3" data-turbolinks="false">
+          <i class="material-icons left">edit</i>編集する
         </button>
         <% end %>
       </div>
@@ -58,12 +56,12 @@
       <div class="section">
         <div>
           <%= link_to set_path(problem: @problem, limit_time: @limit_time), id: :set_link, class: "btn waves-effect waves-light mb-3 mt-4" do %>
-          <i class="material-icons left">replay</i>One More
+          <i class="material-icons left">replay</i>もう一度
           <% end %>
         </div>
         <div>
           <%= link_to root_path, id: :top_link, class: "btn grey waves-effect waves-light", "data-turbolinks": false do %>
-          <i class="material-icons left">arrow_back</i>To Top
+          <i class="material-icons left">arrow_back</i>トップへ
           <% end %>
         </div>
       </div>
