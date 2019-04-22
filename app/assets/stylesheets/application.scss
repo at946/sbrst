@@ -14,8 +14,8 @@ $secondary-color: color("blue", "base") !default;
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 'GenJyuuGothic'!important;
-  color: #212121;
+  font-family: 'TsukuARdGothic-Regular',YuGothic,'Yu Gothic','ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
+  color: color("grey", "darken-3");
 }
 
 #logo {
