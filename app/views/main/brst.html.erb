@@ -1,31 +1,37 @@
 <div id="main_content" class="grey lighten-5">
   <div class="container section">
     <div class="section">
-      <h4 id="limit_time" class="center-align"><%= @setting.limit_time %></h4>
-      <h4 class="center-align blue-text"><%= @setting.problem %></h4>
-
-      <div id="answer_area" class="py-2">
-        <form id="add_answer_form">
-          <div class="input-field">
-            <input type="text" id="answer" class="center-align" name="answer" autofocus>
+      <div class="row">
+        <div class="col s12 mb-4">
+          <h4 id="limit_time" class="center-align"><%= @setting.limit_time %></h4>
+          <h4 class="center-align blue-text my-0"><%= @setting.problem %></h4>
+        </div>
+        <div class="col s12 l6 px-4">
+          <div id="answer_area">
+            <form id="add_answer_form">
+              <div class="input-field my-0">
+                <input type="text" id="answer" class="center-align" name="answer" autofocus>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-
-      <ul id="answer_list" class="collection"></ul>
-
-      <div class="section">
-        <%= form_with url: result_path, local: true, id: "result_form", method: :get do |form| %>
-          <%= hidden_field_tag :problem, @setting.problem %>
-          <%= hidden_field_tag :limit_time, @setting.limit_time / 60000 %>
-          <%= hidden_field_tag "categories[0]", "" %>
-          <div id="post_answer_list"></div>
-          <div class="center">
-            <button id="finish_brst_button" class="btn waves-effect waves-light" type="submit" onclick="return confirm('ブレストを完了しますか？')" disabled>
-              <i class="material-icons left">check</i><span>出し切った！</span>
-            </button>
+          <div class="section">
+            <%= form_with url: result_path, local: true, id: "result_form", method: :get do |form| %>
+              <%= hidden_field_tag :problem, @setting.problem %>
+              <%= hidden_field_tag :limit_time, @setting.limit_time / 60000 %>
+              <%= hidden_field_tag "categories[0]", "" %>
+              <div id="post_answer_list"></div>
+              <div class="center">
+                <button id="finish_brst_button" class="btn waves-effect waves-light" type="submit" onclick="return confirm('ブレストを完了しますか？')" disabled>
+                  <i class="material-icons left">check</i><span>出し切った！</span>
+                </button>
+              </div>
+            <% end %>
           </div>
-        <% end %>
+        </div>
+
+        <div class="col s12 l6 px-4">
+          <ul id="answer_list" class="collection z-depth-1 my-0" style="border: 0;"></ul>
+        </div>
       </div>
     </div>
   </div>
