@@ -5,7 +5,8 @@
     <%= render 'layouts/meta_tag' %>
     <%= render 'layouts/ogp' %>
     <%= render 'layouts/gtm_head' %>
-    <% if true %>
+    
+    <%# Google Adsense %>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
@@ -13,8 +14,7 @@
         enable_page_level_ads: true
       });
     </script>
-    <% end %>
-  </head>
+ </head>
 
   <body>
     <%= render "layouts/gtm_body" %>
