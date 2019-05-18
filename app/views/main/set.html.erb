@@ -1,35 +1,41 @@
 <div id="main_content">
   <div class="container section center-align">
     <h4>Setting</h4>
-    <p class="mb-5">ブレストしたいことと制限時間を設定しましょう。</p>
-    <div class="mb-4">
+    <div class="mb-5">
+      <p>ブレストしたいことと制限時間を設定しましょう。</p>
       <% if @setting.errors.present? %>
         <div class="center-align red-text">
           <% @setting.errors.full_messages.each do |msg| %>
-            <p><%= msg %></p>
+            <p class="my-0"><%= msg %></p>
           <% end %>
         </div>
       <% end %>
     </div>
 
-    <%= form_with url: brst_path, model: @setting, local: true, method: :get do |form| %>
+    <%= form_with url: brst_path, local: true, method: :get do |form| %>
 
       <div class="mb-5">
         <div class="input-field mb-2">
-          <%= form.label :problem %>
-          <%= form.text_field :problem, class: "center-align", autofocus: true %>
+          <%= form.label Setting.human_attribute_name(:problem) %>
+          <%= form.text_field :problem, value: @setting.problem, class: "center-align", autofocus: true %>
         </div>
         <div class="input-field">
-          <label for="limit_time">制限時間(min)</label>
-          <%= form.number_field :limit_time, class: "center-align", placeholder: "1-30" %>
+          <%= form.label Setting.human_attribute_name(:limit_time) + "(min.)" %>
+          <%= form.number_field :limit_time, value: @setting.limit_time, class: "center-align", placeholder: "1-30" %>
         </div>
       </div>
 
       <div class="center">
-        <button id="start_brst_button" class="btn waves-effect waves-light" type="submit">
-          <span>ブレスト開始</span><i class="material-icons right">send</i>
+        <div style="display: inline;">
+          <button type="submit" id="start_brst_button" class="btn waves-effect waves-light mx-2">
+            スタート<i class="material-icons right">send</i>
+          </button>
+        </div>
+        <button type="button" id="share_set_link" class="btn waves-effect waves-light mx-2 orange">
+          シェア<i class="material-icons right">share</i>
         </button>
       </div>
+
 
     <% end %>
   </div>

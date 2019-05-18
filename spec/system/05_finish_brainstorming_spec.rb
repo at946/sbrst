@@ -14,9 +14,9 @@ feature "05_制限時間がすぎる前にブレストを終了できること",
       # 【BRST_START_FIRST_BUTTON】をクリックして、【ブレスト設定ページ】へ遷移する
       click_on :brst_start_first_button
       # 【ブレストしたいこと】に@problemを入力する
-      fill_in :setting_problem, with: @problem
+      fill_in :problem, with: @problem
       # 【制限時間】に@limit_timeを入力する
-      fill_in :setting_limit_time, with: @limit_time
+      fill_in :limit_time, with: @limit_time
       # 【START_BRST_BUTTON】をクリックして、【ブレストページ】へ遷移する
       click_on :start_brst_button
     end
@@ -64,8 +64,8 @@ feature "05_制限時間がすぎる前にブレストを終了できること",
     background do
       visit root_path
       click_on :brst_start_first_button
-      fill_in :setting_problem, with: @problem
-      fill_in :setting_limit_time, with: @limit_time
+      fill_in :problem, with: @problem
+      fill_in :limit_time, with: @limit_time
       click_on :start_brst_button
       @answers.each do |ans|
         fill_in :answer, with: ans

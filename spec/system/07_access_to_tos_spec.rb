@@ -30,8 +30,8 @@ feature "07_利用規約を確認したい", type: :system, js: true do
   scenario "【ブレストページ】で【フッターメニュー】の【利用規約】を選択した場合、【利用規約ページ】へ遷移すること" do
     visit root_path
     click_on :brst_start_first_button
-    fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :problem, with: @problem
+    fill_in :limit_time, with: @limit_time
     click_on :start_brst_button
     expect(current_path).to eq brst_path
     click_on :fmenu_to_tos
@@ -41,8 +41,8 @@ feature "07_利用規約を確認したい", type: :system, js: true do
   scenario "【ブレスト失敗ページ】で【フッターメニュー】の【利用規約】を選択した場合、【利用規約ページ】へ遷移すること" do
     visit root_path
     click_on :brst_start_first_button
-    fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :problem, with: @problem
+    fill_in :limit_time, with: @limit_time
     click_on :start_brst_button
     sleep 65
     expect(current_path).to eq result_path
@@ -54,8 +54,8 @@ feature "07_利用規約を確認したい", type: :system, js: true do
   scenario "【ブレスト結果ページ】で【フッターメニュー】の【利用規約】を選択した場合、【利用規約ページ】へ遷移すること" do
     visit root_path
     click_on :brst_start_first_button
-    fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :problem, with: @problem
+    fill_in :limit_time, with: @limit_time
     click_on :start_brst_button
     @answers.each do |ans|
       fill_in :answer, with: ans
@@ -71,8 +71,8 @@ feature "07_利用規約を確認したい", type: :system, js: true do
   scenario "【まとめページ】で【フッターメニュー】の【利用規約】を選択した場合、【利用規約ページ】へ遷移すること" do
     visit root_path
     click_on :brst_start_first_button
-    fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :problem, with: @problem
+    fill_in :limit_time, with: @limit_time
     click_on :start_brst_button
     @answers.each do |ans|
       fill_in :answer, with: ans
