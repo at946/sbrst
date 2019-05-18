@@ -12,8 +12,8 @@ feature "10_ユーザーとして、アンサーを編集したい", type: :syst
     background do
       visit root_path
       click_on :brst_start_first_button
-      fill_in :setting_problem, with: @problem
-      fill_in :setting_limit_time, with: @limit_time
+      fill_in :problem, with: @problem
+      fill_in :limit_time, with: @limit_time
       click_on :start_brst_button
       @answers.each do |ans|
         fill_in :answer, with: ans

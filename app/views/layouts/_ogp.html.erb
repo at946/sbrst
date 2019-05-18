@@ -1,6 +1,11 @@
 <meta property="og:title" content="S-BRST - シンプルなひとりブレインストーミングツール">
 <meta property="og:type" content="website">
 <meta property="og:description" content="「S-BRST」は、ひとりで集中してアイデア出しや思考整理をしたい時に便利なひとりブレインストーミングツール（ブレストツール）です。シンプルなUIでWeb上で直感的に操作でき、会員登録不要・無料で今すぐ使うことができます。さらに、ブレインストーミングの結果をテキストでコピーしたり、SNSでシェアすることもできます。Your answer is in You.「S-BRST」で「あなたのこたえ」をみつけてみませんか？">
+<% if @url.present? %>
+<meta property="og:url" content=<%= @url %>>
+<% else %>
 <meta property="og:url" content="https://www.toriaezu-brasto.tk">
+<% end %>
 <meta property="og:image" content=<%= image_url "ogp.png" %>>
-<meta name="twitter:card" content="summary large image">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="fb:app_id" content="832453100439280">

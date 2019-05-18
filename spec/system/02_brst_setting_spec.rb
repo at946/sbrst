@@ -25,69 +25,69 @@ feature '02_ブレストの条件を設定できること', type: :system, js: t
     end
 
     scenario "【ブレストしたいこと】を入力できること" do
-      fill_in :setting_problem, with: @problem
-      expect(find("#setting_problem").value).to eq @problem
+      fill_in :problem, with: @problem
+      expect(find("#problem").value).to eq @problem
     end
 
     scenario "【ブレストしたいこと】が未入力の状態で【ブレストを始める】を選択した場合、「ブレストしたいことを入力してください」とエラーが表示されること" do
-      fill_in :setting_problem, with: ""
+      fill_in :problem, with: ""
       click_on :start_brst_button
       expect(page).to have_text "ブレストしたいことを入力してください"
     end
 
     scenario "【ブレストしたいこと】が【半角スペース】または【全角スペース】のみの状態で【ブレストを始める】を選択した場合、「ブレストしたいことを入力してください」とエラーが表示されること" do
-      fill_in :setting_problem, with: " "
+      fill_in :problem, with: " "
       click_on :start_brst_button
       expect(page).to have_text "ブレストしたいことを入力してください"
 
-      fill_in :setting_problem, with: "　"
+      fill_in :problem, with: "　"
       click_on :start_brst_button
       expect(page).to have_text "ブレストしたいことを入力してください"
 
-      fill_in :setting_problem, with: " 　"
+      fill_in :problem, with: " 　"
       click_on :start_brst_button
       expect(page).to have_text "ブレストしたいことを入力してください"
     end
 
     scenario "【制限時間】を設定できること" do
-      fill_in :setting_limit_time, with: @limit_time
-      expect(find("#setting_limit_time").value).to eq @limit_time.to_s
+      fill_in :limit_time, with: @limit_time
+      expect(find("#limit_time").value).to eq @limit_time.to_s
     end
 
     scenario "【制限時間】に半角数字以外を入力できないこと" do
-      fill_in :setting_limit_time, with: @problem
-      expect(find("#setting_limit_time").value).to eq ""
+      fill_in :limit_time, with: @problem
+      expect(find("#limit_time").value).to eq ""
     end
 
     scenario "【制限時間】が未入力の状態で【ブレストを始める】を選択した場合、「制限時間を入力してください」とエラーが表示されること" do
-      fill_in :setting_limit_time, with: ""
+      fill_in :limit_time, with: ""
       click_on :start_brst_button
       expect(page).to have_text "制限時間を入力してください"
     end
 
     scenario "【制限時間】が0以下の状態で【ブレストを始める】を選択した場合、「制限時間は1~30分の間で入力してください」とエラーが表示されること" do
-      fill_in :setting_limit_time, with: 0
+      fill_in :limit_time, with: 0
       click_on :start_brst_button
       expect(page).to have_text "制限時間は1~30分の間で入力してください"
 
-      fill_in :setting_limit_time, with: 1
+      fill_in :limit_time, with: 1
       click_on :start_brst_button
       expect(page).not_to have_text "制限時間は1~30分の間で入力してください"
     end
 
     scenario "【制限時間】が31以上の状態で【ブレストを始める】を選択した場合、「制限時間は1~30分の間で入力してください」とエラーが表示されること" do
-      fill_in :setting_limit_time, with: 31
+      fill_in :limit_time, with: 31
       click_on :start_brst_button
       expect(page).to have_text "制限時間は1~30分の間で入力してください"
 
-      fill_in :setting_limit_time, with: 30
+      fill_in :limit_time, with: 30
       click_on :start_brst_button
       expect(page).not_to have_text "制限時間は1~30分の間で入力してください"
     end
 
     scenario "【ブレストを始める】を選択した場合、【ブレストページ】へ遷移できること" do
-      fill_in :setting_problem, with: @problem
-      fill_in :setting_limit_time, with: @limit_time
+      fill_in :problem, with: @problem
+      fill_in :limit_time, with: @limit_time
       click_on :start_brst_button
 
       expect(current_path).to eq brst_path
@@ -98,8 +98,8 @@ feature '02_ブレストの条件を設定できること', type: :system, js: t
     background do
       visit root_path
       click_on :brst_start_first_button
-      fill_in :setting_problem, with: @problem
-      fill_in :setting_limit_time, with: @limit_time
+      fill_in :problem, with: @problem
+      fill_in :limit_time, with: @limit_time
       click_on :start_brst_button
     end
 

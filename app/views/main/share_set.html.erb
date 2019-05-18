@@ -1,0 +1,44 @@
+<div id="main_content">
+  <div class="container section center-align">
+    <h4>Share setting</h4>
+    <p class="mb-5">ブレストしたいことと制限時間を<span class="orange-text">シェア</span>しましょう。</p>
+
+    <form>
+      <div class="mb-5">
+        <div class="input-field mb-3">
+          <label for="problem"><%= Setting.human_attribute_name(:problem) %></label>
+          <input type="text" name="problem" id="problem" class="center-align" value=<%= @setting.problem %> readonly>
+        </div>
+        <div class="input-field mb-3">
+          <label for="limit_time"><%= Setting.human_attribute_name(:limit_time) + "(min.)" %></label>
+          <input type="text" name="limit_time" id="limit_time" class="center-align" value=<%= @setting.limit_time %> readonly>
+        </div>
+        <div class="input-field">
+          <label for="url">URL</label>
+          <input type="text" name="url" id="url" class="center-align" value=<%= @url %> readonly>
+        </div>
+      </div>
+    </form>
+
+    <div class="mb-5">
+      <i id="share_set_on_twitter" class="fab fa-twitter mx-1 sns-icon white-text z-depth-2 hoverable" style="background-color: #55acee;"></i>
+      <i id="share_set_on_facebook" class="fab fa-facebook-f white-text mx-1 sns-icon z-depth-2 hoverable" style="background-color: #3B5998;"></i>
+    </div>
+
+    <div class="mb-5">
+      <%= link_to set_path(problem: @setting.problem, limit_time: @setting.limit_time), id: :back_button, class: "btn waves-effect waves-light grey" do %>
+       戻る<i class="material-icons left">arrow_back</i>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<%# copy area %>
+<div id="copy_area" class="hide">
+<pre>
+一緒にブレストしましょう！
+お題：#<%= @setting.problem %>
+制限時間：<%= @setting.limit_time %>分
+</pre>
+</div>

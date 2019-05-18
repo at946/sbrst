@@ -11,8 +11,8 @@ feature "16_ブレスト結果ページからブレスト設定ページへ遷�
     background do
       visit root_path
       click_on :brst_start_first_button
-      fill_in :setting_problem, with: @problem
-      fill_in :setting_limit_time, with: @limit_time
+      fill_in :problem, with: @problem
+      fill_in :limit_time, with: @limit_time
       click_on :start_brst_button
       @answers.each do |ans|
         fill_in :answer, with: ans
@@ -28,11 +28,11 @@ feature "16_ブレスト結果ページからブレスト設定ページへ遷�
     end
 
     scenario "【ブレスト設定ページ】で【ブレストしたいこと】に【設定していたブレストしたいこと】がデフォルトで入力されていること" do
-      expect(find("#setting_problem").value).to eq @problem
+      expect(find("#problem").value).to eq @problem
     end
 
     scenario "【ブレスト設定ページ】で【制限時間】に【設定していた制限時間】がデフォルトで入力されていること" do
-      expect(find("#setting_limit_time").value).to eq @limit_time.to_s
+      expect(find("#limit_time").value).to eq @limit_time.to_s
     end
   end
 end

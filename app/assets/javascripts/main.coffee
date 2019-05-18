@@ -12,6 +12,28 @@ $(document).on 'turbolinks:load', ->
     resize_main()
   ########## COMMON END ##########
 
+  ########## SHARE SET PAGE BEGIN ##########
+  $("#share_set_link").click ->
+    problem = $("#problem").val()
+    limit_time = $("#limit_time").val()
+    href = "/share_set?problem=" + problem + "&limit_time=" + limit_time
+    window.location.href = href
+
+  # ブレスト結果ページ：Twitterへのシェア
+  $("#share_set_on_twitter").click ->
+    window.open(
+      "https://twitter.com/intent/tweet?text=" + sns_text() + "&url=" + ascii($("#url").val()) + "&hashtags=SBRST",
+      "_blank"
+    )
+
+  # ブレスト結果ページ：Facebookへのシェア
+  $("#share_set_on_facebook").click ->
+    window.open(
+      "https://www.facebook.com/dialog/share?app_id=832453100439280&display=popup&quote=" + sns_text() + "&href=" + ascii($("#url").val()),
+      "_blank"
+    )
+  ########## SHARE SET PAGE END ##########
+
   ########## BRST PAGE BEGIN ##########
   # 制限時間のカウントダウン
   limit_time = $("#limit_time").text()
@@ -275,6 +297,8 @@ ascii = (str) ->
   str = str.replace(/#/g, '%23')
   str = str.replace(/&/g, '%26')
   str = str.replace(/\+/g, '%2b')
+  str = str.replace(/\//g, '%2f')
+  str = str.replace(/:/g, '%3a')
   str = str.replace(/;/g, '%3b')
   str = str.replace(/\\/g, '%5c')
   str = str.replace(/\^/g, '%5e')

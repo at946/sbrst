@@ -37,8 +37,8 @@ feature '01_トップページにアクセスできること', type: :system, js
   scenario "【ブレストページ】で【ヘッダー】の【ロゴ】を選択した場合、【トップページ】へ遷移すること" do
     visit root_path
     click_on :brst_start_first_button
-    fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :problem, with: @problem
+    fill_in :limit_time, with: @limit_time
     click_on :start_brst_button
 
     expect(current_path).to eq brst_path
@@ -51,8 +51,8 @@ feature '01_トップページにアクセスできること', type: :system, js
   scenario "【ブレスト失敗ページ】で【ヘッダー】の【ロゴ】を選択した場合、【トップページ】へ遷移すること" do
     visit root_path
     click_on :brst_start_first_button
-    fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :problem, with: @problem
+    fill_in :limit_time, with: @limit_time
     click_on :start_brst_button
 
     sleep 65
@@ -68,8 +68,8 @@ feature '01_トップページにアクセスできること', type: :system, js
   scenario "【ブレスト結果ページ】で【ヘッダー】の【ロゴ】を選択した場合、【トップページ】へ遷移すること" do
     visit root_path
     click_on :brst_start_first_button
-    fill_in :setting_problem, with: @problem
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :problem, with: @problem
+    fill_in :limit_time, with: @limit_time
     click_on :start_brst_button
     @answers.each do |ans|
       fill_in :answer, with: ans
@@ -92,9 +92,9 @@ feature '01_トップページにアクセスできること', type: :system, js
     # 【トップページ】で【ブレストを始めるボタン】を選択して、【ブレスト設定ページ】へ遷移する
     click_on :brst_start_first_button
     # 【ブレスト設定ページ】で【ブレストしたいこと】に@problemを入力する
-    fill_in :setting_problem, with: @problem
+    fill_in :problem, with: @problem
     # 【ブレスト設定ページ】で【制限時間】に@limit_timeを入力する
-    fill_in :setting_limit_time, with: @limit_time
+    fill_in :limit_time, with: @limit_time
     # 【ブレスト設定ページ】で【STARTボタン】を選択して、【ブレストページ】へ遷移する
     click_on :start_brst_button
     # 【ブレストページ】で【アンサー】に@answersを１つずつ登録する
