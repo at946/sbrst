@@ -1,4 +1,4 @@
-FROM ruby:2.6.2
+FROM ruby:2.6.3
 
 ENV LANG C.UTF-8
 
@@ -15,3 +15,5 @@ COPY Gemfile /for_now_brainstorming/Gemfile
 COPY Gemfile.lock /for_now_brainstorming/Gemfile.lock
 RUN bundle install
 COPY . /for_now_brainstorming
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
