@@ -41,9 +41,9 @@ ExceptionNotification.configure do |config|
   #   :http_method => :post
   # }
 
-  config.add_notifier :slack, {
-    webhook_url: "https://hooks.slack.com/services/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",
-    channel: "#rails_alert"
-  }
+  # config.add_notifier :slack, {
+  #   webhook_url: ENV["SLACK_WEBHOOK"],
+  #   channel: "#rails_alert"
+  # }
 
 end
